@@ -1,4 +1,35 @@
-// JavaScript Document
+// ===================== CONFETTI GENERATOR =====================
+(function createConfetti() {
+    const container = document.getElementById('confetti-container');
+    const colors = ['#ff7882', '#ff4c6a', '#e91e8c', '#c678dd', '#61afef', '#FFD700', '#FF8C00', '#ffd6e7', '#c3f0ca'];
+    const count = 60;
+
+    for (let i = 0; i < count; i++) {
+        const el = document.createElement('div');
+        el.classList.add('confetti-piece');
+
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const size = Math.random() * 10 + 5;
+        const left = Math.random() * 100;
+        const delay = Math.random() * 8;
+        const duration = Math.random() * 6 + 5;
+        const isCircle = Math.random() > 0.5;
+
+        el.style.cssText = `
+            left: ${left}%;
+            width: ${size}px;
+            height: ${size}px;
+            background-color: ${color};
+            animation-duration: ${duration}s;
+            animation-delay: ${delay}s;
+            opacity: 0;
+            border-radius: ${isCircle ? '50%' : '2px'};
+        `;
+        container.appendChild(el);
+    }
+})();
+
+// ===================== MAIN BIRTHDAY SCRIPT =====================
 let datetxt = "27 march 2025";
 let datatxtletter = "Happy Birthday Kane Kadimi.channag made Neet na.Daily message madalla antha althiyalla kushi na ivaga.Ee sala sigak agalla antha idanna madini.once again Happy birthday kane 😊🎂🎉";
 let titleLetter = "To you";
@@ -10,66 +41,66 @@ let currentIndexLetter = 0;
 let currentIndexTitle = 0;
 let date__of__birth = document.querySelector(".date__of__birth span");
 let text__letter = document.querySelector(".text__letter p");
-setTimeout(function(){
-    timeDatetxt = setInterval(function(){
-        if(currentIndex < charArrDate.length){
+setTimeout(function () {
+    timeDatetxt = setInterval(function () {
+        if (currentIndex < charArrDate.length) {
             date__of__birth.textContent += charArrDate[currentIndex];
             currentIndex++;
         }
-        else{
+        else {
             let i = document.createElement("i");
             i.className = "fa-solid fa-star"
             document.querySelector(".date__of__birth").prepend(i)
             document.querySelector(".date__of__birth").appendChild(i.cloneNode(true))
             clearInterval(timeDatetxt)
         }
-    },100)
-},12000)
+    }, 100)
+}, 12000)
 
 var intervalContent;
 var intervalTitle;
-$("#btn__letter").on("click", function(){
+$("#btn__letter").on("click", function () {
     $(".box__letter").slideDown()
-    setTimeout(function(){
+    setTimeout(function () {
         $(".letter__border").slideDown();
-    },1000)
-    setTimeout(function(){
-        intervalTitle = setInterval(function(){
-            if(currentIndexTitle < charArrTitle.length){
+    }, 1000)
+    setTimeout(function () {
+        intervalTitle = setInterval(function () {
+            if (currentIndexTitle < charArrTitle.length) {
                 document.querySelector(".title__letter").textContent += charArrTitle[currentIndexTitle];
                 let i = document.createElement("i");
                 i.className = "fa-solid fa-heart"
                 document.querySelector(".title__letter").appendChild(i)
                 currentIndexTitle++;
             }
-            else{
+            else {
                 clearInterval(intervalTitle)
             }
-        },100)
-    },2000)
-    setTimeout(function(){
+        }, 100)
+    }, 2000)
+    setTimeout(function () {
         document.querySelector("#heart__letter").classList.add("animationOp");
         document.querySelector(".love__img").classList.add("animationOp");
         document.querySelector("#mewmew").classList.add("animationOp");
-    },2800)
-    setTimeout(function(){
-        document.querySelectorAll(".heart").forEach((item)=>{
+    }, 2800)
+    setTimeout(function () {
+        document.querySelectorAll(".heart").forEach((item) => {
             item.classList.add("animation")
         })
-    },3500)
-    setTimeout(function(){
-        intervalContent = setInterval(function(){
-            if(currentIndexLetter < charArrDateLetter.length){
+    }, 3500)
+    setTimeout(function () {
+        intervalContent = setInterval(function () {
+            if (currentIndexLetter < charArrDateLetter.length) {
                 text__letter.textContent += charArrDateLetter[currentIndexLetter];
                 currentIndexLetter++;
             }
-            else{
+            else {
                 clearInterval(intervalContent)
             }
-        },50)
-    },6000)
+        }, 50)
+    }, 6000)
 })
-$(".close").on("click", function(){
+$(".close").on("click", function () {
     clearInterval(intervalContent)
     document.querySelector(".title__letter").textContent = "";
     text__letter.textContent = "";
@@ -78,9 +109,9 @@ $(".close").on("click", function(){
     document.querySelector("#heart__letter").classList.remove("animationOp");
     document.querySelector(".love__img").classList.remove("animationOp");
     document.querySelector("#mewmew").classList.remove("animationOp");
-    document.querySelectorAll(".heart").forEach((item)=>{
-            item.classList.remove("animation")
-        })
+    document.querySelectorAll(".heart").forEach((item) => {
+        item.classList.remove("animation")
+    })
     $(".box__letter").slideUp();
     $(".letter__border").slideUp();
 })
