@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Titan+One&family=Sriracha&display=swap');
-
 * {
     padding: 0;
     margin: 0;
@@ -14,96 +12,39 @@
     --color-heart: #F61F1F;
     --color-bg-letter: #fff8e4;
     --color-border: #DACCBF;
-    --color-gold: #FFD700;
-    --color-purple: #c678dd;
-    --color-blue: #61afef;
 }
 
 html {
     height: 100%;
 }
 
-/* ===================== ANIMATED BACKGROUND ===================== */
 body {
     position: relative;
     font-size: 16px;
     margin: 0;
     padding: 0;
     height: 100%;
-    background: linear-gradient(-45deg, #ffe4e8, #ffd6e7, #fce4ff, #ffe4cc, #ffeef0);
-    background-size: 400% 400%;
-    animation: gradientShift 8s ease infinite;
-    overflow: hidden;
+    background-image: linear-gradient(var(--color-pink), var(--color-pink));
 }
 
-@keyframes gradientShift {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-/* ===================== CONFETTI ===================== */
-.confetti-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-}
-
-.confetti-piece {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    top: -20px;
-    opacity: 0;
-    animation: confettiFall linear infinite;
-    border-radius: 2px;
-}
-
-@keyframes confettiFall {
-    0% {
-        transform: translateY(-20px) rotate(0deg);
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(110vh) rotate(720deg);
-        opacity: 0;
-    }
-}
-
-/* ===================== WRAPPER ===================== */
 #wrapper {
     position: relative;
-    height: 100%;
     background-color: transparent;
-    background-image:
-        linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.4) 25%, rgba(255, 255, 255, 0.4) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.4) 75%, rgba(255, 255, 255, 0.4) 76%, transparent 77%, transparent),
-        linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.4) 25%, rgba(255, 255, 255, 0.4) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.4) 75%, rgba(255, 255, 255, 0.4) 76%, transparent 77%, transparent);
+    background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255, 1) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 1) 75%, rgba(255, 255, 255, 1) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 1) 25%, rgba(255, 255, 255, 1) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 1) 75%, rgba(255, 255, 255, 1) 76%, transparent 77%, transparent);
+    min-height: 100vh;
     background-size: 80px 80px;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-/* ===================== FLAG ===================== */
 .flag__birthday {
     display: flex;
     justify-content: space-between;
     transform: translateY(-200px);
     animation: translateYFlag 1.5s 2s forwards;
-    filter: drop-shadow(0 4px 8px rgba(255, 120, 130, 0.4));
 }
 
 @keyframes translateYFlag {
@@ -120,13 +61,14 @@ body {
     transform: rotate(10deg) translate(20px, 30px) scaleX(-1);
 }
 
-/* ===================== CONTENT LAYOUT ===================== */
 .content {
     width: 100%;
+    flex: 1;
     position: relative;
     display: flex;
-    padding-top: 3rem;
-    z-index: 2;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 5%;
 }
 
 .content .left,
@@ -136,24 +78,84 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
 
 .content .left {
-    width: 40%;
+    width: 50%;
 }
 
 .content .right {
-    width: 60%;
+    width: 50%;
 }
 
-/* ===================== TITLE / HAPPY BIRTHDAY TEXT ===================== */
+.left .btn {
+    transform: scale(0);
+    animation: scaleCricle 2s 16s forwards ease-in-out;
+}
+
+#btn__letter {
+    position: relative;
+    margin-top: 30px;
+    background-color: var(--color-text-pink);
+    outline: none;
+    padding: 5px 15px;
+    font-size: 1rem;
+    border-radius: 50px;
+    border: 3px solid var(--color-black);
+    font-family: "Sriracha", cursive;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transform: scale(1);
+    transition: all .5s ease-in-out;
+}
+
+#btn__letter:active {
+    transform: scale(0.7);
+}
+
+#btn__letter i {
+    margin-left: 5px;
+}
+
+#btn__letter:hover {
+    border-color: var(--color-heart);
+    background-color: var(--color-heart);
+    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#btn__letter:hover i {
+    animation: rotateHeart 1s infinite linear;
+}
+
+@keyframes rotateHeart {
+
+    0%,
+    50%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(12deg);
+    }
+
+    75% {
+        transform: rotate(-12deg);
+    }
+}
+
 .title {
     position: relative;
     width: 100%;
     display: flex;
     justify-content: center;
     font-family: "Titan One", sans-serif;
-    font-size: 3rem;
+    font-size: clamp(2rem, 8vw, 4.5rem);
     flex-direction: column;
     perspective: 1000px;
 }
@@ -161,53 +163,18 @@ body {
 .title .happy,
 .title .birthday {
     position: relative;
+    text-shadow: 4px 4px var(--color-black),
+        -4px 4px var(--color-black),
+        4px -4px var(--color-black),
+        -4px -4px var(--color-black),
+        4px 8px 0 var(--color-black);
     font-weight: bold;
     display: flex;
     justify-content: center;
-    letter-spacing: 4px;
 }
 
 .title .happy {
-    color: #fff;
-    text-shadow:
-        3px 3px 0 #e91e8c,
-        -3px 3px 0 #e91e8c,
-        3px -3px 0 #e91e8c,
-        -3px -3px 0 #e91e8c,
-        0 6px 20px rgba(233, 30, 140, 0.5);
-    animation: glowHappy 2s ease-in-out infinite alternate;
-}
-
-@keyframes glowHappy {
-    from {
-        filter: drop-shadow(0 0 5px rgba(255, 120, 180, 0.5));
-    }
-
-    to {
-        filter: drop-shadow(0 0 20px rgba(255, 120, 180, 0.9));
-    }
-}
-
-.title .birthday {
-    color: var(--color-text-pink);
-    text-shadow:
-        3px 3px 0 #b5006e,
-        -3px 3px 0 #b5006e,
-        3px -3px 0 #b5006e,
-        -3px -3px 0 #b5006e,
-        0 6px 20px rgba(181, 0, 110, 0.4);
-    animation: glowBirthday 2s ease-in-out infinite alternate;
-    animation-delay: 0.5s;
-}
-
-@keyframes glowBirthday {
-    from {
-        filter: drop-shadow(0 0 5px rgba(255, 80, 120, 0.4));
-    }
-
-    to {
-        filter: drop-shadow(0 0 20px rgba(255, 80, 120, 0.9));
-    }
+    color: var(--color-white);
 }
 
 .title .happy span,
@@ -216,14 +183,6 @@ body {
     opacity: 0;
     visibility: hidden;
     animation: txtTranslateY .5s var(--t) forwards;
-    display: inline-block;
-    transition: transform 0.2s;
-}
-
-.title .happy span:hover,
-.title .birthday span:hover {
-    transform: translateY(-8px) scale(1.3);
-    cursor: default;
 }
 
 @keyframes txtTranslateY {
@@ -234,15 +193,17 @@ body {
     }
 }
 
-/* ===================== HAT ===================== */
+.title .birthday {
+    color: var(--color-text-pink);
+}
+
 .title .hat {
     position: absolute;
-    right: 45px;
+    right: 15%;
     top: -350px;
     transform: rotate(-40deg);
     z-index: -1;
     animation: topHat 4s 7s forwards ease;
-    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
 }
 
 @keyframes topHat {
@@ -261,17 +222,16 @@ body {
     }
 }
 
-/* ===================== DATE OF BIRTH ===================== */
 .date__of__birth,
 .name {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background: linear-gradient(135deg, #ff7882, #ff4c6a);
+    background-color: var(--color-text-pink);
     border-radius: 50px;
     margin-top: 20px;
     font-family: "Sriracha", cursive;
-    box-shadow: 0 4px 15px rgba(255, 76, 106, 0.3);
+
 }
 
 .date__of__birth {
@@ -325,7 +285,6 @@ body {
 .name span {
     font-weight: bold;
     margin: 0px 40px;
-    color: #fff;
 }
 
 .date__of__birth span {
@@ -336,87 +295,10 @@ body {
     font-size: 1.7rem;
 }
 
-/* ===================== BUTTON ===================== */
-.left .btn {
-    transform: scale(0);
-    animation: scaleCricle 2s 16s forwards ease-in-out;
-}
-
-#btn__letter {
-    position: relative;
-    margin-top: 30px;
-    background: linear-gradient(135deg, #ff7882, #ff4c6a);
-    outline: none;
-    padding: 10px 25px;
-    font-size: 1rem;
-    border-radius: 50px;
-    border: 3px solid var(--color-black);
-    font-family: "Sriracha", cursive;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 2;
-    transform: scale(1);
-    transition: all .3s ease-in-out;
-    color: white;
-    box-shadow: 0 4px 20px rgba(255, 76, 106, 0.4), 0 0 0 0 rgba(255, 76, 106, 0.5);
-    animation: btnPulse 2s ease-in-out infinite;
-}
-
-@keyframes btnPulse {
-
-    0%,
-    100% {
-        box-shadow: 0 4px 20px rgba(255, 76, 106, 0.4), 0 0 0 0 rgba(255, 76, 106, 0.5);
-    }
-
-    50% {
-        box-shadow: 0 4px 20px rgba(255, 76, 106, 0.4), 0 0 0 10px rgba(255, 76, 106, 0);
-    }
-}
-
-#btn__letter:active {
-    transform: scale(0.9);
-}
-
-#btn__letter i {
-    margin-left: 8px;
-}
-
-#btn__letter:hover {
-    background: linear-gradient(135deg, #ff4c6a, #e91e8c);
-    color: #fff;
-    transform: scale(1.05) translateY(-2px);
-    box-shadow: 0 8px 25px rgba(233, 30, 140, 0.5);
-}
-
-#btn__letter:hover i {
-    animation: rotateHeart 0.5s infinite linear;
-}
-
-@keyframes rotateHeart {
-
-    0%,
-    50%,
-    100% {
-        transform: rotate(0deg);
-    }
-
-    25% {
-        transform: rotate(12deg);
-    }
-
-    75% {
-        transform: rotate(-12deg);
-    }
-}
-
-/* ===================== PROFILE IMAGE (Right side) ===================== */
 .right .box__account {
     position: relative;
     transform: translateY(700px);
-    animation: topBoxImage 8s 7s forwards ease-in;
+    animation: topBoxImage 5s 5s forwards ease-in;
 }
 
 @keyframes topBoxImage {
@@ -427,52 +309,32 @@ body {
 
 .content .right .image {
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 350px;
+    height: 350px;
     border-radius: 50%;
     overflow: hidden;
     display: flex;
     align-items: center;
-    border: 6px solid transparent;
-    background: linear-gradient(white, white) padding-box,
-        linear-gradient(135deg, #ff7882, #e91e8c, #c678dd, #61afef, #ff7882) border-box;
-    animation: rotateBorder 4s linear infinite;
-    box-shadow: 0 0 30px rgba(255, 120, 130, 0.5), inset 0 0 30px rgba(255, 120, 130, 0.1);
-}
-
-@keyframes rotateBorder {
-    0% {
-        box-shadow: 0 0 20px rgba(255, 120, 130, 0.5);
-    }
-
-    33% {
-        box-shadow: 0 0 30px rgba(198, 120, 221, 0.5);
-    }
-
-    66% {
-        box-shadow: 0 0 30px rgba(97, 175, 239, 0.5);
-    }
-
-    100% {
-        box-shadow: 0 0 20px rgba(255, 120, 130, 0.5);
-    }
+    border: 6px solid var(--color-black);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .content .right .image img {
     width: 100%;
     object-fit: cover;
+
 }
 
-/* ===================== SPINNING CIRCLE ===================== */
 .cricle {
     position: absolute;
-    top: 20px;
-    right: 50px;
+    top: -20px;
+    right: -20px;
     display: flex;
     justify-content: center;
     align-items: center;
     transform: scale(0);
-    animation: scaleCricle 3s 15s forwards ease-in-out;
+    animation: scaleCricle 3s 12s forwards ease-in-out;
+    z-index: 10;
 }
 
 @keyframes scaleCricle {
@@ -492,19 +354,19 @@ body {
     100% {
         transform: scale(1);
     }
+
 }
 
 .text__cricle {
     width: 100px;
     height: 100px;
-    background: linear-gradient(135deg, #ff7882, #ff4c6a);
+    background-color: var(--color-text-pink);
     border-radius: 50%;
     border: 5px solid var(--color-black);
     display: flex;
     justify-content: center;
     align-items: center;
     animation: rotateCricle 5s linear infinite;
-    box-shadow: 0 0 20px rgba(255, 76, 106, 0.4);
 }
 
 @keyframes rotateCricle {
@@ -517,20 +379,17 @@ body {
     top: 0%;
     left: 50%;
     position: absolute;
-    color: #fff;
+    color: var(--color-black);
     transform: rotate(calc(var(--i) * 24deg));
     transform-origin: 0 45px;
     font-family: "Sriracha", cursive;
     text-transform: uppercase;
     font-size: 0.7rem;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* ===================== HEARTS ===================== */
 .fa-heart {
     color: var(--color-heart);
-    filter: drop-shadow(0 0 6px var(--color-heart));
+    filter: drop-shadow(0 0 3px var(--color-heart));
     animation: scaleHeart 1s infinite linear;
 }
 
@@ -541,17 +400,15 @@ body {
 
 @keyframes scaleHeart {
     50% {
-        transform: scale(1.3);
+        transform: scale(1.2);
     }
 }
 
-/* ===================== BALLOONS ===================== */
 .right .balloon_one {
     position: absolute;
-    top: -70px;
-    left: -70px;
+    top: -50px;
+    left: -50px;
     animation: balloon1 2s infinite linear;
-    filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.15));
 }
 
 @keyframes balloon1 {
@@ -565,23 +422,22 @@ body {
 
     25% {
         transform-origin: bottom right;
-        transform: rotate(4deg);
+        transform: rotate(3deg);
     }
 
     75% {
         transform-origin: bottom right;
-        transform: rotate(-4deg);
+        transform: rotate(-3deg);
     }
 }
 
 .right .balloon_two {
     position: absolute;
-    top: 170px;
-    right: -65px;
+    bottom: 20px;
+    right: -80px;
     z-index: -1;
     transform: rotate(10deg);
     animation: balloon2 2s infinite linear;
-    filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.15));
 }
 
 @keyframes balloon2 {
@@ -604,114 +460,104 @@ body {
     }
 }
 
-/* ===================== STARS ===================== */
 .decorate_star {
     position: absolute;
     transform: scale(0);
-    background: linear-gradient(135deg, #FFD700, #FFA500);
+    background-color: var(--color-black);
     clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);
     animation: scaleCricle 3s var(--t) forwards,
         scaleStar 2s 16s infinite ease-in-out;
-    filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.8));
 }
 
 .decorate_star.star1 {
     width: 20px;
     height: 20px;
-    top: 75px;
-    left: 300px;
+    top: 15%;
+    left: 10%;
 }
 
 .decorate_star.star2 {
     width: 15px;
     height: 20px;
-    top: 35px;
-    right: 360px;
+    top: 10%;
+    right: 15%;
 }
 
 .decorate_star.star3 {
     width: 14px;
     height: 14px;
-    top: 290px;
-    left: 630px;
+    top: 40%;
+    left: 15%;
 }
 
 .decorate_star.star4 {
     width: 18px;
     height: 18px;
-    bottom: 60px;
-    left: 35px;
+    bottom: 20%;
+    left: 10%;
 }
 
 .decorate_star.star5 {
     width: 16px;
     height: 18px;
-    bottom: 140px;
-    left: 500px;
+    bottom: 10%;
+    right: 20%;
 }
 
 @keyframes scaleStar {
     25% {
-        transform: scale(0.8) rotate(15deg);
+        transform: scale(0.8);
     }
 
     50% {
-        transform: scale(1.2) rotate(30deg);
-    }
-
-    75% {
-        transform: scale(0.9) rotate(45deg);
+        transform: scale(1.1);
     }
 }
 
-/* ===================== FLOWERS / DECORATIONS ===================== */
 .decorate_bottom {
     position: absolute;
     right: 0;
     bottom: -10px;
-    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.1));
-}
-
-.decorate_flower--one,
-.decorate_flower--two,
-.decorate_flower--three {
-    position: absolute;
-    transform: scale(0);
-    animation: scaleCricle 3s var(--t) forwards ease-in-out;
-    filter: drop-shadow(0 0 8px rgba(255, 120, 130, 0.5));
 }
 
 .decorate_flower--one {
-    top: 250px;
-    left: 50px;
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    transform: scale(0);
+    animation: scaleCricle 3s var(--t) forwards ease-in-out;
 }
 
 .decorate_flower--two {
-    top: 225px;
-    left: 540px;
+    position: absolute;
+    bottom: 20%;
+    right: 5%;
+    transform: scale(0);
+    animation: scaleCricle 3s var(--t) forwards ease-in-out;
 }
 
 .decorate_flower--three {
-    top: 150px;
-    right: 235px;
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    transform: scale(0);
+    animation: scaleCricle 3s var(--t) forwards ease-in-out;
 }
 
 .smiley__icon {
     position: absolute;
-    bottom: 180px;
-    left: 600px;
+    bottom: 10%;
+    left: 5%;
     transform: scale(0);
     animation: scaleCricle 3s 15s forwards ease-in-out;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
 }
 
-/* ===================== LETTER MODAL ===================== */
+
 .box__letter {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(8px);
+    background-color: rgba(0, 0, 0, .5);
     width: 100%;
     height: 100%;
     z-index: 10;
@@ -720,54 +566,39 @@ body {
 
 .box__letter .letter__border {
     position: absolute;
-    width: 60vw;
-    height: 480px;
-    background: linear-gradient(135deg, #fff8f0, #fff0f5);
-    border-radius: 32px;
-    padding: 18px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(255, 120, 130, 0.3);
+    width: 55vw;
+    height: 450px;
+    background-color: var(--color-white);
+    border-radius: 27px;
+    padding: 17px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: none;
-    border: 2px solid rgba(255, 120, 130, 0.3);
 }
 
 .letter__border .close {
     position: absolute;
-    right: -14px;
-    top: -14px;
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, #ff7882, #e91e8c);
+    right: -10px;
+    top: -10px;
+    width: 30px;
+    height: 30px;
+    background-color: var(--color-white);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 12px rgba(233, 30, 140, 0.4);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     cursor: pointer;
-    color: white;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.letter__border .close:hover {
-    transform: scale(1.15) rotate(90deg);
-    box-shadow: 0 6px 16px rgba(233, 30, 140, 0.6);
-}
-
-.letter__border .close i {
-    color: white;
-    font-size: 0.9rem;
 }
 
 .letter__border .letter {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #fff8e4, #fff0f8);
-    border-radius: 20px;
+    background-color: var(--color-bg-letter);
+    border-radius: 10px;
     padding-top: 15px;
-    border: 1px solid rgba(255, 120, 130, 0.2);
-    box-shadow: inset 0 2px 8px rgba(255, 120, 130, 0.1);
 }
 
 .letter__border .letter .title__letter {
@@ -775,8 +606,6 @@ body {
     font-family: 'Dancing Script', cursive;
     font-weight: bold;
     font-size: 2.4rem;
-    color: #e91e8c;
-    text-shadow: 0 2px 10px rgba(233, 30, 140, 0.3);
 }
 
 .title__letter .fa-solid {
@@ -798,13 +627,12 @@ body {
     width: 50%;
     height: 100%;
     padding: 1.7rem;
-    border-right: 2px dashed rgba(255, 120, 130, 0.4);
+    border-right: 3px solid var(--color-border);
 }
 
 .content__letter .left #heart__letter {
     opacity: 0;
     width: 100%;
-    border-radius: 12px;
 }
 
 #heart__letter.animationOp {
@@ -847,6 +675,7 @@ body {
         opacity: 1;
         transform: scale(1);
     }
+
 }
 
 .content__letter .left .heart_1 {
@@ -890,8 +719,6 @@ body {
     padding: 20px 15px 10px 15px;
     font-family: 'Dancing Script', cursive;
     font-size: 1.3rem;
-    color: #555;
-    line-height: 1.6;
 }
 
 .content__letter .right #mewmew {
@@ -899,43 +726,36 @@ body {
     bottom: 0;
     right: 0;
     opacity: 0;
-    border-radius: 12px;
 }
 
 #mewmew.animationOp {
     animation: opacityHeart 1s 1s forwards;
 }
 
-/* ===================== SPARKLE DOTS ===================== */
-.sparkle {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: white;
-    pointer-events: none;
-    animation: sparkleAnim 1.5s ease-in-out infinite;
+
+#copy {
+    position: fixed;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
 }
 
-@keyframes sparkleAnim {
-
-    0%,
-    100% {
-        opacity: 0;
-        transform: scale(0);
-    }
-
-    50% {
-        opacity: 1;
-        transform: scale(1);
-    }
+#copy a {
+    text-decoration: none;
+    color: #191919d7;
 }
 
-/* ===================== MEDIA QUERY (Mobile) ===================== */
-@media screen and (max-width: 768px) {
-    body {
-        font-size: 14px;
-    }
+#copy p {
+    color: #ff3d5a;
+    text-align: center;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+
+@media screen and (max-width: 658px) {
 
     .flag__birthday .flag__left {
         transform: rotate(-10deg) translate(-119px, 3px);
@@ -946,104 +766,142 @@ body {
     }
 
     .content {
+        width: 100%;
+        position: relative;
+        display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 20px;
+        gap: 25px;
         align-items: center;
         padding-top: 2rem;
     }
 
-    .content .left,
-    .content .right {
+    .title {
+        position: relative;
         width: 100%;
+        display: flex;
+        justify-content: center;
+        font-family: "Titan One", sans-serif;
+        font-size: 1.5rem;
+        letter-spacing: 8px;
+        flex-direction: column;
+        perspective: 1000px;
     }
 
-    .title {
-        font-size: 1.8rem;
-        letter-spacing: 6px;
+    #btn__letter {
+        position: relative;
+        margin-top: 17px;
+        width: 209px;
+        background-color: var(--color-text-pink);
+        outline: none;
+        padding: 6px 4px;
+        font-size: 1rem;
+        border-radius: 50px;
+        border: 3px solid var(--color-black);
+        font-family: "Sriracha", cursive;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 2;
+        /* transform: scale(1); */
+        transition: all .5s ease-in-out;
+    }
+
+    .cricle {
+        position: absolute;
+        top: 10px;
+        right: -54px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: scale(0);
+        animation: scaleCricle 3s 15s forwards ease-in-out;
     }
 
     .title .hat {
         position: absolute;
-        right: -30px;
+        right: -98px;
         top: -51px !important;
         transform: rotate(-40deg);
-    }
-
-    .content .right .image {
-        width: 220px;
-        height: 220px;
-    }
-
-    .cricle {
-        top: 10px;
-        right: -40px;
-    }
-
-    #btn__letter {
-        margin-top: 17px;
-        width: 220px;
-        padding: 8px 10px;
+        z-index: -1;
+        animation: topHat 4s 7s forwards ease;
     }
 
     .box__letter .letter__border {
-        width: 92vw;
-        height: auto;
-        min-height: 340px;
-        padding: 14px;
+        position: absolute;
+        width: 90vw;
+        height: 315px;
+        background-color: var(--color-white);
+        border-radius: 27px;
+        padding: 17px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+    }
+
+    .letter__border .letter {
+        width: 100%;
+        height: 100%;
+        background-color: var(--color-bg-letter);
+        border-radius: 10px;
+        padding-top: 15px;
     }
 
     .letter__border .letter .title__letter {
-        font-size: 1.5rem;
+        text-align: center;
+        font-family: 'Dancing Script', cursive;
+        font-weight: bold;
+        font-size: 1.4rem;
     }
 
     .letter__border .letter .content__letter {
-        flex-direction: column;
-        padding-bottom: 20px;
-    }
-
-    .letter__border .letter .content__letter .left {
+        position: relative;
         width: 100%;
-        height: auto;
-        padding: 1rem;
-        border-right: none;
-        border-bottom: 2px dashed rgba(255, 120, 130, 0.4);
-    }
-
-    .content__letter .right {
-        width: 100%;
-        padding: 1rem;
+        height: 100%;
+        display: flex;
+        padding-top: .7rem;
+        padding-bottom: 70px;
     }
 
     .content__letter .right .text__letter {
-        margin-top: 10px;
-        font-size: 1rem;
+        margin-top: -14px;
+        padding: 20px 15px 10px 15px;
+        font-family: 'Dancing Script', cursive;
+        font-size: .8rem;
     }
 
     .content__letter .right .love__img {
-        position: relative;
-        right: auto;
-        top: auto;
-        display: flex;
-        justify-content: center;
-        margin-bottom: 10px;
+        opacity: 0;
+        position: absolute;
+        right: 126px;
+        top: 167px;
     }
 
     .love__img img {
-        width: 100px !important;
+
+        width: 84px;
+
     }
 
-    .content__letter .right #mewmew {
+    .content .right .image {
         position: relative;
-        bottom: auto;
-        right: auto;
-        display: block;
-        margin: 10px auto 0;
-        opacity: 0;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        border: 6px solid var(--color-black);
     }
 
     .name {
-        padding: 0px 10px;
+        position: absolute;
+        padding: 0px 3px;
+        bottom: -6px;
+        border: 3px solid var(--color-black);
     }
 
     .name span {
@@ -1051,11 +909,15 @@ body {
     }
 
     .right .balloon_one {
+        position: absolute;
         top: 10px;
-        left: -50px;
+        left: -77px;
+        animation: balloon1 2s infinite linear;
     }
 
     .right .balloon_one img {
-        width: 70px !important;
+        width: 76px !important;
     }
+
+
 }
