@@ -1,5 +1,8 @@
-/* ===== REFACTORED CSS - CLEAN & ROBUST ===== */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&family=Sriracha&family=Titan+One&display=swap');
+﻿/*
+    ðŸŽ“ LESSON: @import loads fonts from Google Fonts.
+    Pacifico = a fun, bubbly, festive font â€” perfect for birthdays!
+*/
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Sriracha&display=swap');
 
 * {
     padding: 0;
@@ -17,692 +20,1872 @@
     --color-border: #DACCBF;
 }
 
-html,
-body {
+html {
     height: 100%;
-    width: 100%;
+}
+
+/*
+    ðŸŽ¨ UPGRADE #5: ANIMATED GRADIENT BACKGROUND
+    ðŸŽ“ LESSON: Instead of a static color, we use multiple gradient
+    colors and animate the background-position shifting.
+    'background-size: 400%' makes the gradient 4x bigger than the screen
+    so there's always color to shift through!
+*/
+body {
+    position: relative;
+    font-size: 16px;
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--color-pink);
-    overflow-x: hidden;
-}
-
-/* ===== PARTICLE HEARTS CANVAS ===== */
-#heartCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
     height: 100%;
-    pointer-events: none;
-    z-index: 0;
+    /* Animated gradient with soft pinks, whites and peach tones */
+    background: linear-gradient(-45deg, #feecea, #ffe4f0, #fff0f7, #ffd6e7, #ffe8d6, #feecea);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
 }
 
-/* ===== MUSIC BUTTON ===== */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+
+    /* ðŸŽ“ This smoothly slides the gradient left â†’ right â†’ left forever */
+}
+
+/*
+    ðŸŽµ UPGRADE #6: MUSIC BUTTON STYLES
+    ðŸŽ“ LESSON: position:fixed means the button stays in the same
+    spot on screen even when you scroll â€” it's "fixed" to viewport.
+    top/left/right/bottom tell it WHERE on the screen to sit.
+*/
 .music__btn {
     position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 999;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: var(--color-text-pink);
+    /* stays in corner while page scrolls */
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    /* always on top of everything */
+
+    /* Visual styling */
+    background: linear-gradient(135deg, #ff7882, #F61F1F);
     color: white;
+    border: none;
+    border-radius: 50px;
+    /* pill shape */
+    padding: 12px 20px;
+    font-size: 15px;
+    font-family: 'Sriracha', cursive;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 3px solid var(--color-black);
+    gap: 8px;
+
+    /* Shadow for depth */
+    box-shadow: 0 4px 20px rgba(246, 31, 31, 0.4);
+
+    /* Smooth transition when hover/state changes */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .music__btn:hover {
-    transform: scale(1.15);
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 8px 28px rgba(246, 31, 31, 0.6);
 }
 
-.music__btn.playing i {
-    animation: musicPulse 1.5s ease-in-out infinite;
+/*
+    ðŸŽ“ LESSON: When JS adds class "playing" to the button,
+    this extra animation kicks in â€” a gentle pulse/beat effect!
+    JS does: button.classList.add('playing')
+*/
+.music__btn.playing {
+    animation: musicPulse 1.2s ease-in-out infinite;
+}
+
+.music__btn.playing .music__label::after {
+    content: ' ON';
 }
 
 @keyframes musicPulse {
 
     0%,
     100% {
+        box-shadow: 0 4px 20px rgba(246, 31, 31, 0.4);
         transform: scale(1);
     }
 
     50% {
-        transform: scale(1.3);
-        text-shadow: 0 0 10px white;
+        box-shadow: 0 6px 30px rgba(246, 31, 31, 0.8);
+        transform: scale(1.05);
     }
+
+    /* Pulses in sync â€” like a heartbeat! */
 }
 
-/* ===== MAIN WRAPPER ===== */
+
 #wrapper {
     position: relative;
+    background-color: transparent;
+    /* Removed the grid pattern â€” the animated gradient on body is now the background */
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
     z-index: 1;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-image:
-        linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.5) 25%, rgba(255, 255, 255, 0.5) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.5) 75%, rgba(255, 255, 255, 0.5) 76%, transparent 77%, transparent),
-        linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.5) 25%, rgba(255, 255, 255, 0.5) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.5) 75%, rgba(255, 255, 255, 0.5) 76%, transparent 77%, transparent);
-    background-size: 80px 80px;
-}
-
-/* ===== HERO SECTION ===== */
-.hero__section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 80px 20px 40px;
-    min-height: 100vh;
-    width: 100%;
 }
 
 .flag__birthday {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
     display: flex;
     justify-content: space-between;
-    z-index: 10;
-    pointer-events: none;
-    transform: translateY(-100%);
-    animation: slideDownFlag 1s 0.5s forwards ease-out;
+    transform: translateY(-200px);
+    animation: translateYFlag 1.5s 2s forwards;
 }
 
-@keyframes slideDownFlag {
+@keyframes translateYFlag {
     to {
         transform: translateY(-10px);
     }
 }
 
-.flag__birthday img {
-    width: clamp(200px, 30vw, 350px);
+.flag__birthday .flag__left {
+    transform: rotate(-10deg) translate(-20px, 30px);
 }
 
-.flag__left {
-    transform: rotate(-5deg);
+.flag__birthday .flag__right {
+    transform: rotate(10deg) translate(20px, 30px) scaleX(-1);
 }
 
-.flag__right {
-    transform: rotate(5deg) scaleX(-1);
-}
-
-/* ===== CONTENT LAYOUT ===== */
 .content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10%;
     width: 100%;
-    max-width: 1200px;
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 5%;
 }
 
 .content .left,
 .content .right {
+    position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.content .left {
+    width: 50%;
+}
+
+.content .right {
+    width: 50%;
+}
+
+.left .btn {
+    transform: scale(0);
+    /* â±ï¸ Was 16s delay â€” now 7s. The button appears much sooner! */
+    animation: scaleCricle 2s 7s forwards ease-in-out;
+}
+
+#btn__letter {
+    position: relative;
+    margin-top: 30px;
+    background-color: var(--color-text-pink);
+    outline: none;
+    padding: 5px 15px;
+    font-size: 1rem;
+    border-radius: 50px;
+    border: 3px solid var(--color-black);
+    font-family: "Sriracha", cursive;
+    display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1;
+    cursor: pointer;
+    z-index: 2;
+    transform: scale(1);
+    transition: all .5s ease-in-out;
 }
 
-/* ===== TEXT STYLES ===== */
+#btn__letter:active {
+    transform: scale(0.7);
+}
+
+#btn__letter i {
+    margin-left: 5px;
+}
+
+#btn__letter:hover {
+    border-color: var(--color-heart);
+    background-color: var(--color-heart);
+    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+#btn__letter:hover i {
+    animation: rotateHeart 1s infinite linear;
+}
+
+@keyframes rotateHeart {
+
+    0%,
+    50%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(12deg);
+    }
+
+    75% {
+        transform: rotate(-12deg);
+    }
+}
+
 .title {
-    font-family: "Titan One", sans-serif;
-    font-size: clamp(2rem, 8vw, 4.5rem);
-    text-align: center;
-    line-height: 1.1;
-    margin-bottom: 2rem;
     position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* ðŸŽ¨ Changed to Pacifico â€” bubbly, festive, birthday-perfect! */
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(2rem, 7vw, 4rem);
+    flex-direction: column;
+    perspective: 1000px;
 }
 
-.happy,
-.birthday {
-    display: block;
-    text-shadow: 3px 3px var(--color-black), -3px 3px var(--color-black),
-        3px -3px var(--color-black), -3px -3px var(--color-black),
-        0 6px 0 var(--color-black);
+/*
+    âœ¨ UPGRADE #3: GLOW EFFECTS
+    ðŸŽ“ LESSON: text-shadow works like this:
+        text-shadow: x-offset  y-offset  blur  color;
+    When x=0 and y=0, the shadow spreads in ALL directions = GLOW!
+    We stack multiple shadows with increasing blur for a rich glow.
+
+    We also add an 'animation' to make it pulse (breathe in/out).
+    The animation is defined in @keyframes below.
+*/
+.title .happy,
+.title .birthday {
+    position: relative;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
 }
 
-.happy {
+/* "HAPPY" â€” white text with a white/pink outer glow */
+.title .happy {
     color: var(--color-white);
+    text-shadow:
+        4px 4px var(--color-black),
+        -4px 4px var(--color-black),
+        4px -4px var(--color-black),
+        -4px -4px var(--color-black),
+        /* âœ¨ Glow layers â€” same color, 0 offset, different blur sizes */
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 25px rgba(255, 120, 130, 0.6),
+        0 0 50px rgba(255, 120, 130, 0.4);
+    animation: txtTranslateY .5s var(--t) forwards,
+        happyGlow 2.5s 3s ease-in-out infinite;
+    /* glow starts after letters appear */
 }
 
-.birthday {
+/* "BIRTHDAY" â€” pink text with a pink/red outer glow */
+.title .birthday {
     color: var(--color-text-pink);
+    text-shadow:
+        4px 4px var(--color-black),
+        -4px 4px var(--color-black),
+        4px -4px var(--color-black),
+        -4px -4px var(--color-black),
+        /* âœ¨ Glow layers â€” pink/red colors */
+        0 0 10px rgba(255, 120, 130, 0.9),
+        0 0 30px rgba(246, 31, 31, 0.6),
+        0 0 60px rgba(246, 31, 31, 0.3);
+    animation: txtTranslateY .5s var(--t) forwards,
+        birthdayGlow 2.5s 3s ease-in-out infinite;
 }
 
-.title span {
-    display: inline-block;
+.title .happy span,
+.title .birthday span {
+    transform: translateY(50px);
     opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 0.5s var(--t) forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    visibility: hidden;
+    /* â±ï¸ Each letter uses --t set in HTML (0.5s, 0.7s...) */
+    animation: txtTranslateY .5s var(--t) forwards;
 }
 
-@keyframes fadeInUp {
+@keyframes txtTranslateY {
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/*
+    ðŸŽ“ LESSON: @keyframes defines WHAT the animation does.
+    0% = start,  50% = middle,  100% = end.
+    'infinite' in the animation property makes it loop forever.
+    'ease-in-out' makes it accelerate and decelerate smoothly.
+*/
+@keyframes happyGlow {
+
+    0%,
+    100% {
+        text-shadow:
+            4px 4px var(--color-black),
+            -4px 4px var(--color-black),
+            4px -4px var(--color-black),
+            -4px -4px var(--color-black),
+            0 0 10px rgba(255, 255, 255, 0.8),
+            0 0 25px rgba(255, 120, 130, 0.5),
+            0 0 50px rgba(255, 120, 130, 0.3);
+    }
+
+    50% {
+        /* At the peak, the glow is much bigger and brighter! */
+        text-shadow:
+            4px 4px var(--color-black),
+            -4px 4px var(--color-black),
+            4px -4px var(--color-black),
+            -4px -4px var(--color-black),
+            0 0 20px rgba(255, 255, 255, 1),
+            0 0 50px rgba(255, 120, 130, 0.9),
+            0 0 90px rgba(255, 120, 130, 0.7),
+            0 0 120px rgba(255, 80, 100, 0.4);
+    }
+}
+
+@keyframes birthdayGlow {
+
+    0%,
+    100% {
+        text-shadow:
+            4px 4px var(--color-black),
+            -4px 4px var(--color-black),
+            4px -4px var(--color-black),
+            -4px -4px var(--color-black),
+            0 0 10px rgba(255, 120, 130, 0.9),
+            0 0 30px rgba(246, 31, 31, 0.5),
+            0 0 60px rgba(246, 31, 31, 0.2);
+    }
+
+    50% {
+        text-shadow:
+            4px 4px var(--color-black),
+            -4px 4px var(--color-black),
+            4px -4px var(--color-black),
+            -4px -4px var(--color-black),
+            0 0 20px rgba(255, 120, 130, 1),
+            0 0 50px rgba(246, 31, 31, 0.9),
+            0 0 90px rgba(246, 31, 31, 0.6),
+            0 0 130px rgba(200, 0, 50, 0.4);
+    }
+}
+
+.title .hat {
+    position: absolute;
+    right: 15%;
+    top: -350px;
+    transform: rotate(-40deg);
+    z-index: -1;
+    /* â±ï¸ Was 7s delay â€” now 3s. Hat drops down faster! */
+    animation: topHat 4s 3s forwards ease;
+}
+
+@keyframes topHat {
+
+    20%,
+    30% {
+        top: -30px;
+        transform-origin: left;
+        transform: rotate(-40deg);
+    }
+
+    35%,
+    100% {
+        top: -30px;
+        transform: rotate(0deg);
+    }
+}
+
+.date__of__birth,
+.name {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--color-text-pink);
+    border-radius: 50px;
+    margin-top: 20px;
+    font-family: "Sriracha", cursive;
+
+}
+
+/*
+    ðŸŽ“ FIX: Date of Birth
+    Old version had z-index:-1 hiding it behind other elements.
+    New: simple fade + slide up animation. Clean and always visible!
+*/
+.date__of__birth {
+    border: 3px solid var(--color-black);
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: dateOfBirth 1s 3s forwards ease-out;
+    padding: 8px 30px;
+    min-width: 220px;
+    justify-content: center;
+}
+
+@keyframes dateOfBirth {
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-.title .hat {
-    position: absolute;
-    top: -60px;
-    right: 5%;
-    width: clamp(80px, 15vw, 130px);
-    transform: rotate(15deg);
-    animation: hatFloat 2s 5s infinite alternate ease-in-out;
-    opacity: 0;
-    animation-fill-mode: both;
-}
-
-@keyframes hatFloat {
-    from {
-        transform: rotate(10deg) translateY(0);
-        opacity: 1;
-    }
-
-    to {
-        transform: rotate(20deg) translateY(-10px);
-        opacity: 1;
-    }
-}
-
-/* ===== DATE & BUTTON ===== */
-.date__of__birth {
-    background: var(--color-text-pink);
-    border: 3px solid var(--color-black);
-    padding: 10px 30px;
-    border-radius: 50px;
-    font-family: "Sriracha", cursive;
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin: 20px 0;
-    opacity: 0;
-    transform: scale(0.8);
-    animation: popIn 0.8s 6s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.btn #btn__letter {
-    font-family: "Sriracha", cursive;
-    padding: 12px 35px;
-    font-size: 1.1rem;
-    border-radius: 50px;
-    border: 3px solid var(--color-black);
-    background: var(--color-text-pink);
-    cursor: pointer;
-    transition: all 0.3s;
-    box-shadow: 0 6px 0 var(--color-black);
-    opacity: 0;
-    animation: popIn 0.8s 7s forwards;
-}
-
-.btn #btn__letter:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 9px 0 var(--color-black);
-    background: var(--color-heart);
-    color: white;
-}
-
-.btn #btn__letter:active {
-    transform: translateY(3px);
-    box-shadow: 0 3px 0 var(--color-black);
-}
-
-@keyframes popIn {
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* ===== PROFILE CARD ===== */
-.box__account {
+/*
+    ðŸ”§ FIX: Rakshita's name was position:absolute + bottom:-20px
+    which clipped it under the photo and  made it invisible.
+    Now itâ€™s position:relative so it sits naturally below the photo.
+*/
+.name {
     position: relative;
-    padding: 20px;
+    padding: 8px 30px;
+    margin-top: 30px;
+    border: 3px solid var(--color-black);
+    /* Add a glow to make it pop */
+    box-shadow: 0 0 12px rgba(255, 120, 130, 0.4);
 }
 
-.image {
-    width: clamp(200px, 30vw, 350px);
-    height: clamp(200px, 30vw, 350px);
+.date__of__birth span,
+.name span {
+    font-weight: bold;
+    margin: 0;
+}
+
+.date__of__birth span {
+    font-size: 1.1rem;
+}
+
+.name span {
+    font-size: 1.4rem;
+    color: #333;
+    letter-spacing: 0.5px;
+}
+
+.right .box__account {
+    position: relative;
+    transform: translateY(700px);
+    /* â±ï¸ Was 5s delay â€” now 2s. The profile photo slides up almost immediately! */
+    animation: topBoxImage 5s 2s forwards ease-in;
+}
+
+@keyframes topBoxImage {
+    to {
+        transform: translateY(0);
+    }
+}
+
+/*
+    ðŸŽ¨ UPGRADE #4: SPINNING RAINBOW BORDER ON PHOTO
+    ðŸŽ“ LESSON: conic-gradient() sweeps colors around a center point,
+    like a color wheel. We animate it spinning with @keyframes.
+    The ::before pseudo-element draws the ring BEHIND the photo.
+*/
+.content .right .image {
+    position: relative;
+    width: 350px;
+    height: 350px;
     border-radius: 50%;
-    overflow: hidden;
-    border: 6px solid var(--color-black);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    background: white;
+    overflow: visible;
+    /* allow ring to show outside */
+    display: flex;
+    align-items: center;
+    border: none;
+    /* ring replaces the old static border */
+    z-index: 1;
 }
 
-.image img {
+/* The actual photo needs overflow:hidden to stay circular */
+.content .right .image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
 }
 
-.name {
+/* Spinning rainbow ring drawn behind the photo */
+.content .right .image::before {
+    content: '';
     position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--color-text-pink);
-    border: 3px solid var(--color-black);
-    padding: 5px 30px;
-    border-radius: 50px;
-    white-space: nowrap;
-    font-family: "Sriracha", cursive;
-    font-weight: bold;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    inset: -6px;
+    border-radius: 50%;
+    /* conic-gradient = colors sweep around in a circle */
+    background: conic-gradient(#ff7882, #ffd700, #ff7882, #a855f7, #3b82f6, #22d3ee, #ff7882);
+    animation: spinRing 3s linear infinite;
+    z-index: 1;
 }
 
-/* ===== SPINNING CIRCLE ===== */
+@keyframes spinRing {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.content .right .image img {
+    width: 100%;
+    object-fit: cover;
+
+}
+
 .cricle {
     position: absolute;
     top: -20px;
     right: -20px;
-    width: 100px;
-    height: 100px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    transform: scale(0);
+    /* â±ï¸ Was 12s delay â€” now 7s. The spinning circle pops in sooner! */
+    animation: scaleCricle 3s 7s forwards ease-in-out;
     z-index: 10;
 }
 
-.text__cricle {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: var(--color-text-pink);
-    border: 4px solid var(--color-black);
-    border-radius: 50%;
-    animation: rotate 8s linear infinite;
+@keyframes scaleCricle {
+    0% {
+        transform: scale(0);
+    }
+
+    10% {
+        transform: scale(1.3);
+    }
+
+    20% {
+        transform: scale(0.7);
+    }
+
+    30%,
+    100% {
+        transform: scale(1);
+    }
+
 }
 
-@keyframes rotate {
+.text__cricle {
+    width: 100px;
+    height: 100px;
+    background-color: var(--color-text-pink);
+    border-radius: 50%;
+    border: 5px solid var(--color-black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rotateCricle 5s linear infinite;
+}
+
+@keyframes rotateCricle {
     to {
         transform: rotate(360deg);
     }
 }
 
 .text__cricle span {
-    position: absolute;
+    top: 0%;
     left: 50%;
-    top: 5px;
-    transform-origin: 0 45px;
-    font-size: 0.7rem;
-    font-weight: bold;
-    text-transform: uppercase;
+    position: absolute;
+    color: var(--color-black);
     transform: rotate(calc(var(--i) * 24deg));
+    transform-origin: 0 45px;
+    font-family: "Sriracha", cursive;
+    text-transform: uppercase;
+    font-size: 0.7rem;
 }
 
-.cricle i {
+.fa-heart {
     color: var(--color-heart);
-    font-size: 1.2rem;
-    z-index: 2;
-    animation: heartbeat 1s infinite;
+    filter: drop-shadow(0 0 3px var(--color-heart));
+    animation: scaleHeart 1s infinite linear;
 }
 
-@keyframes heartbeat {
+.cricle .fa-heart {
+    position: absolute;
+    transform: scale(0.85);
+}
+
+@keyframes scaleHeart {
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.right .balloon_one {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    animation: balloon1 2s infinite linear;
+}
+
+@keyframes balloon1 {
 
     0%,
+    50%,
     100% {
-        transform: scale(1);
+        transform-origin: bottom right;
+        transform: rotate(0deg);
     }
 
-    50% {
-        transform: scale(1.3);
+    25% {
+        transform-origin: bottom right;
+        transform: rotate(3deg);
+    }
+
+    75% {
+        transform-origin: bottom right;
+        transform: rotate(-3deg);
     }
 }
 
-/* ===== BALLOONS ===== */
-.balloon_one,
-.balloon_two {
+.right .balloon_two {
     position: absolute;
-    z-index: -1;
-    pointer-events: none;
-}
-
-.balloon_one {
-    top: -40px;
-    left: -60px;
-    animation: float1 3s infinite alternate ease-in-out;
-}
-
-.balloon_two {
     bottom: 20px;
     right: -80px;
-    animation: float2 3s 0.5s infinite alternate ease-in-out;
+    z-index: -1;
+    transform: rotate(10deg);
+    animation: balloon2 2s infinite linear;
 }
 
-@keyframes float1 {
-    from {
-        transform: rotate(-5deg) translateY(0);
+@keyframes balloon2 {
+
+    0%,
+    50%,
+    100% {
+        transform-origin: bottom left;
+        transform: rotate(10deg);
     }
 
-    to {
-        transform: rotate(5deg) translateY(-15px);
-    }
-}
-
-@keyframes float2 {
-    from {
-        transform: rotate(15deg) translateY(0);
+    25% {
+        transform-origin: bottom left;
+        transform: rotate(7deg);
     }
 
-    to {
-        transform: rotate(5deg) translateY(-15px);
+    75% {
+        transform-origin: bottom left;
+        transform: rotate(13deg);
     }
-}
-
-/* ===== DECORATIONS ===== */
-.decorate_star,
-.decorate_flower--one,
-.decorate_flower--two,
-.decorate_flower--three,
-.smiley__icon {
-    position: absolute;
-    pointer-events: none;
-    z-index: 0;
 }
 
 .decorate_star {
-    background: var(--color-black);
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    width: 20px;
-    height: 20px;
-    animation: twinkle 2s var(--t) infinite alternate;
+    position: absolute;
+    transform: scale(0);
+    background-color: var(--color-black);
+    clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);
+    /* â±ï¸ Stars twinkling loop was 16s â€” now 8s */
+    animation: scaleCricle 3s var(--t) forwards,
+        scaleStar 2s 8s infinite ease-in-out;
 }
 
-@keyframes twinkle {
-    from {
-        opacity: 0.3;
-        transform: scale(0.7);
+.decorate_star.star1 {
+    width: 20px;
+    height: 20px;
+    top: 15%;
+    left: 10%;
+}
+
+.decorate_star.star2 {
+    width: 15px;
+    height: 20px;
+    top: 10%;
+    right: 15%;
+}
+
+.decorate_star.star3 {
+    width: 14px;
+    height: 14px;
+    top: 40%;
+    left: 15%;
+}
+
+.decorate_star.star4 {
+    width: 18px;
+    height: 18px;
+    bottom: 20%;
+    left: 10%;
+}
+
+.decorate_star.star5 {
+    width: 16px;
+    height: 18px;
+    bottom: 10%;
+    right: 20%;
+}
+
+@keyframes scaleStar {
+    25% {
+        transform: scale(0.8);
     }
 
-    to {
-        opacity: 1;
+    50% {
         transform: scale(1.1);
     }
 }
 
-.star1 {
-    top: 15%;
-    left: 8%;
-}
-
-.star2 {
-    top: 12%;
-    right: 12%;
-}
-
-.star3 {
-    top: 45%;
-    left: 5%;
-}
-
-.star4 {
-    bottom: 25%;
-    right: 8%;
-}
-
-.star5 {
-    bottom: 15%;
-    left: 15%;
+.decorate_bottom {
+    position: absolute;
+    right: 0;
+    bottom: -10px;
 }
 
 .decorate_flower--one {
+    position: absolute;
     top: 30%;
     left: 5%;
+    transform: scale(0);
+    animation: scaleCricle 3s var(--t) forwards ease-in-out;
 }
 
 .decorate_flower--two {
-    bottom: 15%;
-    right: 15%;
+    position: absolute;
+    bottom: 20%;
+    right: 5%;
+    transform: scale(0);
+    animation: scaleCricle 3s var(--t) forwards ease-in-out;
 }
 
 .decorate_flower--three {
+    position: absolute;
     top: 20%;
-    right: 5%;
+    right: 10%;
+    transform: scale(0);
+    animation: scaleCricle 3s var(--t) forwards ease-in-out;
 }
 
 .smiley__icon {
+    position: absolute;
     bottom: 10%;
-    left: 10%;
-    animation: bounce 2s infinite ease-in-out;
+    left: 5%;
+    transform: scale(0);
+    /* â±ï¸ Was 15s delay â€” now 7s. Smiley appears sooner! */
+    animation: scaleCricle 3s 7s forwards ease-in-out;
 }
 
-@keyframes bounce {
 
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-20px);
-    }
+.box__letter {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .5);
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: none;
 }
 
-/* ===== PHOTO GALLERY ===== */
-.gallery__section {
-    padding: 100px 20px;
+.box__letter .letter__border {
+    position: absolute;
+    width: 55vw;
+    height: 450px;
+    background-color: var(--color-white);
+    border-radius: 27px;
+    padding: 17px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.letter__border .close {
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    width: 30px;
+    height: 30px;
+    background-color: var(--color-white);
+    border-radius: 50%;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    cursor: pointer;
 }
 
-.gallery__title {
+.letter__border .letter {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-bg-letter);
+    border-radius: 10px;
+    padding-top: 15px;
+}
+
+.letter__border .letter .title__letter {
+    text-align: center;
     font-family: 'Dancing Script', cursive;
+    font-weight: bold;
+    font-size: 2.4rem;
+}
+
+.title__letter .fa-solid {
+    margin-left: 5px;
+    font-size: 1.3rem;
+}
+
+.letter__border .letter .content__letter {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding-top: 1.5rem;
+    padding-bottom: 70px;
+}
+
+.letter__border .letter .content__letter .left {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    padding: 1.7rem;
+    border-right: 3px solid var(--color-border);
+}
+
+.content__letter .left #heart__letter {
+    opacity: 0;
+    width: 100%;
+}
+
+#heart__letter.animationOp {
+    animation: opacityHeart 1s 1s forwards;
+}
+
+@keyframes opacityHeart {
+    to {
+        opacity: 1;
+    }
+}
+
+.content__letter .left .heart {
+    position: absolute;
+    opacity: 0;
+}
+
+.content__letter .left .heart.animation {
+    animation: scaleHeartLetter 1s var(--t) infinite ease-in-out;
+}
+
+@keyframes scaleHeartLetter {
+    0% {
+        opacity: 1;
+        transform: scale(0);
+    }
+
+    10% {
+        opacity: 1;
+        transform: scale(1.3);
+    }
+
+    20% {
+        opacity: 1;
+        transform: scale(0.7);
+    }
+
+    30%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+.content__letter .left .heart_1 {
+    top: 90px;
+    left: 30px;
+}
+
+.content__letter .left .heart_2 {
+    top: 20px;
+    right: 70px;
+}
+
+.content__letter .left .heart_3 {
+    bottom: 50px;
+    left: 145px;
+}
+
+.content__letter .left .heart_4 {
+    top: 140px;
+    right: 35px;
+}
+
+.content__letter .right {
+    position: relative;
+    width: 50%;
+}
+
+.content__letter .right .love__img {
+    opacity: 0;
+    position: absolute;
+    right: 20px;
+    top: -100px;
+}
+
+.love__img.animationOp {
+    animation: opacityHeart 1s 1s forwards;
+}
+
+.content__letter .right .text__letter {
+    margin-top: 60px;
+    padding: 20px 15px 10px 15px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+}
+
+.content__letter .right #mewmew {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+}
+
+#mewmew.animationOp {
+    animation: opacityHeart 1s 1s forwards;
+}
+
+
+#copy {
+    position: fixed;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+}
+
+#copy a {
+    text-decoration: none;
+    color: #191919d7;
+}
+
+#copy p {
+    color: #ff3d5a;
+    text-align: center;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+
+
+
+/* ============================================================
+   ðŸ“± UPGRADE #7: MOBILE RESPONSIVE DESIGN
+   ðŸŽ“ LESSON: @media queries apply styles ONLY when the screen
+   matches a condition. The most common condition is max-width:
+   
+       @media (max-width: 768px) { ... }
+   
+   This means: "IF screen width is 768px or less, use these styles"
+   
+   We have 3 breakpoints (sizes where layout changes):
+   - Tablet  : max-width 900px
+   - Phone   : max-width 600px
+   - Sm Phone: max-width 400px
+   ============================================================ */
+
+/* â”€â”€ TABLET (â‰¤ 900px) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@media (max-width: 900px) {
+
+    /*
+        ðŸŽ“ On tablet, the left+right sit side-by-side but closer together.
+        We reduce the photo size and text to fit the narrower screen.
+    */
+    .content {
+        gap: 30px;
+        padding: 1rem 4%;
+    }
+
+    .title {
+        font-size: clamp(1.8rem, 6vw, 3rem);
+    }
+
+    .content .right .image {
+        width: 260px;
+        height: 260px;
+    }
+
+    .flag__birthday img {
+        width: 250px;
+    }
+}
+
+/* â”€â”€ PHONE (â‰¤ 600px) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@media (max-width: 600px) {
+
+    /*
+        ðŸŽ“ On phones, we STACK things vertically instead of side-by-side.
+        flex-direction: column  means items go TOP â†’ BOTTOM
+        flex-direction: row     means items go LEFT â†’ RIGHT (default)
+    */
+    .content {
+        flex-direction: column;
+        /* Stack left + right vertically */
+        align-items: center;
+        padding: 80px 5% 2rem;
+        /* top padding clears the flag */
+        gap: 20px;
+    }
+
+    .content .left,
+    .content .right {
+        width: 100%;
+        /* each section takes full width */
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Smaller birthday text on phone */
+    .title {
+        font-size: clamp(2.2rem, 12vw, 3.5rem);
+        align-items: center;
+    }
+
+    /* Smaller photo circle */
+    .content .right .image {
+        width: 220px;
+        height: 220px;
+    }
+
+    /* Spinning circle repositioned for mobile */
+    .cricle {
+        top: -15px;
+        right: -10px;
+    }
+
+    /* Balloons â€” reposition so they don't fly off screen */
+    .right .balloon_one {
+        top: -40px;
+        left: -30px;
+    }
+
+    .right .balloon_one img {
+        width: 70px !important;
+    }
+
+    .right .balloon_two {
+        bottom: 10px;
+        right: -40px;
+    }
+
+    .right .balloon_two img {
+        width: 70px !important;
+    }
+
+    /* Hat â€” smaller and repositioned */
+    .title .hat {
+        right: 5%;
+    }
+
+    .title .hat img {
+        width: 80px !important;
+    }
+
+    /* Date of birth â€” make text smaller */
+    .date__of__birth span {
+        font-size: 0.9rem;
+    }
+
+    /* Flag banners â€” hide on small screens (they overlap content) */
+    .flag__birthday {
+        display: none;
+    }
+
+    /* Music button â€” smaller on phone */
+    .music__btn {
+        bottom: 15px;
+        right: 15px;
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    /* Letter popup â€” full width on phone */
+    .box__letter .letter__border {
+        width: 95vw;
+        height: auto;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    /* Stack letter content vertically */
+    .letter__border .letter .content__letter {
+        flex-direction: column;
+    }
+
+    .letter__border .letter .content__letter .left,
+    .content__letter .right {
+        width: 100%;
+    }
+
+    .content__letter .right .love__img {
+        position: relative;
+        right: auto;
+        top: auto;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+}
+
+/* â”€â”€ SMALL PHONE (â‰¤ 400px) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@media (max-width: 400px) {
+
+    .title {
+        font-size: clamp(1.8rem, 11vw, 2.8rem);
+    }
+
+    .content .right .image {
+        width: 180px;
+        height: 180px;
+    }
+
+    .name span {
+        font-size: 1rem;
+    }
+
+    .date__of__birth {
+        min-width: 160px;
+        padding: 6px 15px;
+    }
+}
+
+/* =====================================================
+   UPGRADE 8: MEMORIES GALLERY
+   ===================================================== */
+.gallery__section {
+    width: 100%;
+    padding: 60px 5% 60px;
+    /* Same animated gradient as the body — seamless continuation */
+    background: linear-gradient(-45deg, #feecea, #ffe4f0, #fff0f7, #ffd6e7, #ffe8d6, #feecea);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+    /* Soft separator line matching the birthday card border style */
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery__header {
+    text-align: center;
+    margin-bottom: 35px;
+    position: relative;
+}
+
+/* Same font + glow as "Happy Birthday" title */
+.gallery__header h2 {
+    font-family: 'Pacifico', cursive;
     font-size: clamp(2rem, 5vw, 3rem);
     color: var(--color-text-pink);
-    margin-bottom: 3rem;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+    text-shadow:
+        4px 4px var(--color-black),
+        -4px 4px var(--color-black),
+        4px -4px var(--color-black),
+        -4px -4px var(--color-black),
+        0 0 15px rgba(255, 120, 130, 0.7),
+        0 0 40px rgba(255, 120, 130, 0.4);
+    animation: birthdayGlow 2.5s ease-in-out infinite;
+    margin-bottom: 10px;
 }
 
+.gallery__header p {
+    font-family: 'Sriracha', cursive;
+    font-size: 1.1rem;
+    color: #888;
+    letter-spacing: 1px;
+}
+
+/*
+    🎓 HORIZONTAL SCROLL TRICK:
+    display:flex puts all cards in a ROW.
+    overflow-x: auto = allow scrolling left-right.
+    scroll-snap-type: x mandatory = snap to each card perfectly.
+    padding adds breathing room so first/last cards aren't flush to edge.
+    We hide scrollbar visually but keep it functional.
+*/
 .gallery__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    width: 100%;
-    max-width: 1100px;
+    display: flex;
+    flex-direction: row;
+    gap: 18px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 20px 40px 30px;
+    scroll-snap-type: x mandatory;
+    /* smooth snap to each card */
+    -webkit-overflow-scrolling: touch;
+    /* smooth on iOS */
+    cursor: grab;
+    /* shows grab cursor on desktop */
+    /* Hide scrollbar visually (still scrollable!) */
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-text-pink) rgba(255, 120, 130, 0.1);
 }
 
+/* Chrome scrollbar styling */
+.gallery__grid::-webkit-scrollbar {
+    height: 6px;
+}
+
+.gallery__grid::-webkit-scrollbar-track {
+    background: rgba(255, 120, 130, 0.1);
+    border-radius: 10px;
+}
+
+.gallery__grid::-webkit-scrollbar-thumb {
+    background: var(--color-text-pink);
+    border-radius: 10px;
+}
+
+/*
+    🎓 flex-shrink: 0 is CRITICAL for horizontal scroll!
+    Without it, flex items shrink to fit — they'd all squish onto one screen.
+    With it, each card keeps its fixed width and you SCROLL to see them.
+    scroll-snap-align: start = this card snaps to the left edge when scrolled.
+*/
 .gallery__item {
-    aspect-ratio: 1;
-    border: 5px solid var(--color-black);
-    border-radius: 20px;
+    flex-shrink: 0;
+    /* don't squish — keep full size */
+    width: 280px;
+    /* fixed card width */
+    height: 280px;
+    /* fixed card height (square) */
     overflow: hidden;
-    cursor: pointer;
+    border-radius: 20px;
     position: relative;
-    transition: transform 0.3s;
-    box-shadow: 0 10px 0 var(--color-black);
+    cursor: pointer;
+    border: 3px solid rgba(255, 120, 130, 0.3);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    scroll-snap-align: start;
+    /* snap to this card's left edge */
 }
 
 .gallery__item:hover {
-    transform: translateY(-8px);
+    transform: scale(1.04) translateY(-6px);
+    box-shadow: 0 16px 35px rgba(255, 120, 130, 0.4);
+    border-color: var(--color-text-pink);
 }
 
 .gallery__item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.gallery__item:hover img {
+    transform: scale(1.08);
 }
 
 .gallery__overlay {
     position: absolute;
     inset: 0;
-    background: rgba(255, 120, 130, 0.6);
+    background: rgba(255, 120, 130, 0.45);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: 0.3s;
-    font-size: 2rem;
-    color: white;
+    transition: opacity 0.3s ease;
+    border-radius: 13px;
 }
 
 .gallery__item:hover .gallery__overlay {
     opacity: 1;
 }
 
-/* ===== LIGHTBOX ===== */
-.lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.95);
-    z-index: 10000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(10px);
+.gallery__overlay i {
+    color: white;
+    font-size: 2rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
 }
 
-.lightbox.active {
+/* Footer matches the same festive feel as the letter button */
+.gallery__footer {
+    text-align: center;
+    margin-top: 40px;
+    font-family: 'Pacifico', cursive;
+    font-size: 1.4rem;
+    color: var(--color-text-pink);
+    letter-spacing: 1px;
+    text-shadow:
+        2px 2px var(--color-black),
+        0 0 15px rgba(255, 120, 130, 0.5);
+    animation: birthdayGlow 3s ease-in-out infinite;
+}
+
+/* Floating decorative hearts inside memories section */
+.gallery__section::before,
+.gallery__section::after {
+    content: '♥';
+    position: absolute;
+    font-size: 1.5rem;
+    color: rgba(255, 120, 130, 0.2);
+    animation: floatHeart 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.gallery__section::before {
+    top: 30px;
+    left: 5%;
+    animation-delay: 0s;
+}
+
+.gallery__section::after {
+    top: 30px;
+    right: 5%;
+    animation-delay: 1.5s;
+}
+
+@keyframes floatHeart {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-18px) rotate(10deg);
+    }
+}
+
+/* LIGHTBOX */
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox.open {
     display: flex;
+}
+
+.lightbox__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
 }
 
 .lightbox__content {
     position: relative;
-    max-width: 90%;
-    max-height: 90%;
+    z-index: 1;
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    animation: lightboxPop 0.3s ease;
+}
+
+@keyframes lightboxPop {
+    from {
+        transform: scale(0.85);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .lightbox__content img {
-    max-width: 100%;
-    max-height: 85vh;
-    border: 10px solid white;
-    border-radius: 10px;
+    display: block;
+    max-width: 90vw;
+    max-height: 88vh;
+    object-fit: contain;
 }
 
 .lightbox__close {
     position: absolute;
-    top: -20px;
-    right: -20px;
-    background: var(--color-text-pink);
-    width: 50px;
-    height: 50px;
-    border: 3px solid var(--color-black);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.6);
     color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    box-shadow: 0 4px 0 var(--color-black);
-}
-
-/* ===== LETTER MODAL ===== */
-.box__letter {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 2000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(5px);
-}
-
-.letter__border {
-    background: white;
-    padding: 15px;
-    border-radius: 30px;
-    width: 90%;
-    max-width: 800px;
-    position: relative;
-    box-shadow: 0 20px 0 var(--color-black);
-    display: none;
-}
-
-.letter {
-    background: var(--color-bg-letter);
-    border-radius: 20px;
-    padding: 40px;
-    max-height: 80vh;
-    overflow-y: auto;
-}
-
-.title__letter {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2.5rem;
-    color: var(--color-text-pink);
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.content__letter {
-    display: flex;
-    gap: 30px;
-}
-
-.text__letter p {
-    font-family: 'Sriracha', cursive;
-    line-height: 1.8;
-    font-size: 1.1rem;
-    color: #555;
-}
-
-.letter__border .close {
-    position: absolute;
-    top: -20px;
-    right: -20px;
-    background: white;
-    width: 45px;
-    height: 45px;
+    border: none;
     border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 3px solid var(--color-black);
-    cursor: pointer;
-    box-shadow: 0 4px 0 var(--color-black);
+    z-index: 2;
+    transition: background 0.2s;
 }
 
-/* ===== MOBILE ADAPTATION ===== */
-@media (max-width: 768px) {
-    .content {
-        flex-direction: column;
-        gap: 50px;
+.lightbox__close:hover {
+    background: var(--color-text-pink);
+}
+
+/* Responsive — smaller cards on phones */
+@media (max-width: 600px) {
+    .gallery__grid {
+        gap: 12px;
+        padding: 15px 20px 20px;
     }
 
-    .content .left,
-    .content .right {
-        width: 100%;
-        flex: none;
+    .gallery__item {
+        width: 220px;
+        height: 220px;
     }
+}
 
-    .title {
-        font-size: 2.5rem;
-    }
-
-    .image {
-        width: 280px;
-        height: 280px;
-    }
-
-    .flag__left,
-    .flag__right {
+@media (max-width: 400px) {
+    .gallery__item {
         width: 180px;
+        height: 180px;
     }
 
-    .content__letter {
-        flex-direction: column;
-        align-items: center;
+    .gallery__section {
+        padding: 40px 0 30px;
+    }
+}
+
+/* =====================================================
+   CAROUSEL — Card-by-card with slide transition
+   ===================================================== */
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0 20px;`r`n    z-index: 1;
+}
+
+/* The frame that holds all stacked cards */
+.carousel__track {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    /* taller — fits portrait WhatsApp photos */
+    perspective: 1200px;
+}
+
+/* Every card: stacked absolutely on top of each other */
+.carousel__card {
+    position: absolute;
+    inset: 0;
+    border-radius: 22px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.85) translateX(120px);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.4s ease;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+    border: 4px solid rgba(255, 120, 130, 0.35);
+}
+
+.carousel__card img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* FULL photo visible — no cropping! */
+    display: block;
+    background: #fee9ec;
+    /* soft pink fill for empty letterbox areas */
+}
+
+/* The ACTIVE card — centred and fully visible */
+.carousel__card.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1) translateX(0);
+    z-index: 3;
+}
+
+/* Card sliding OUT to the LEFT (going forward) */
+.carousel__card.exit-left {
+    opacity: 0;
+    transform: scale(0.85) translateX(-130px) rotateY(8deg);
+    z-index: 2;
+}
+
+/* Card sliding OUT to the RIGHT (going back) */
+.carousel__card.exit-right {
+    opacity: 0;
+    transform: scale(0.85) translateX(130px) rotateY(-8deg);
+    z-index: 2;
+}
+
+/* Card entering from the RIGHT (going forward) */
+.carousel__card.enter-right {
+    opacity: 0;
+    transform: scale(0.85) translateX(130px) rotateY(-8deg);
+}
+
+/* Card entering from the LEFT (going back) */
+.carousel__card.enter-left {
+    opacity: 0;
+    transform: scale(0.85) translateX(-130px) rotateY(8deg);
+}
+
+/* Prev / Next arrow buttons */
+.carousel__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-100%);
+    z-index: 10;
+    background: white;
+    border: 3px solid var(--color-text-pink);
+    color: var(--color-text-pink);
+    border-radius: 50%;
+    width: 46px;
+    height: 46px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(255, 120, 130, 0.3);
+    transition: all 0.2s ease;
+}
+
+.carousel__btn:hover {
+    background: var(--color-text-pink);
+    color: white;
+    transform: translateY(-100%) scale(1.12);
+}
+
+.carousel__btn--prev {
+    left: -20px;
+}
+
+.carousel__btn--next {
+    right: -20px;
+}
+
+/* Counter "3 / 9" */
+.carousel__counter {
+    font-family: 'Sriracha', cursive;
+    font-size: 1rem;
+    color: #888;
+    letter-spacing: 2px;
+    margin-top: -10px;
+}
+
+/* Dot indicators */
+.carousel__dots {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.carousel__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 120, 130, 0.3);
+    border: 2px solid var(--color-text-pink);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.carousel__dot.active {
+    background: var(--color-text-pink);
+    transform: scale(1.3);
+}
+
+@media (max-width: 600px) {
+    .carousel {
+        max-width: 95vw;
+    }
+
+    .carousel__track {
+        height: 320px;
+    }
+
+    .carousel__btn {
+        width: 38px;
+        height: 38px;
+        font-size: 0.85rem;
+    }
+
+    .carousel__btn--prev {
+        left: -10px;
+    }
+
+    .carousel__btn--next {
+        right: -10px;
+    }
+}
+
+/* =====================================================
+   MEMORIES SECTION — Matching Decorations
+   Same animations as the hero, new positions for this section
+   ===================================================== */
+
+/* Stars — scattered around the section (position:absolute inside position:relative section) */
+.mem-decorate_star {
+    position: absolute;
+    animation: scaleStar 2s var(--t, 0s) infinite ease-in-out;
+    pointer-events: none;
+    z-index: 20;
+}
+.mem-star1 { top: 12%; left: 8%;  --t: 0.2s; }
+.mem-star2 { top: 10%; right: 8%; --t: 0.5s; }
+.mem-star3 { top: 40%; left: 3%;  --t: 0.8s; }
+.mem-star4 { top: 40%; right: 3%; --t: 0.3s; }
+.mem-star5 { bottom: 18%; left: 6%;  --t: 1s; }
+
+/* Smiley icon — bottom right corner, gently spinning */
+.mem-smiley {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    pointer-events: none;
+    z-index: 20;
+    opacity: 0.85;
+    animation: rotateSmiley 6s linear infinite;
+}
+@keyframes rotateSmiley {
+    to { transform: rotate(360deg); }
+}
+
+/* Balloons — top corners, swaying like in hero */
+.mem-balloon {
+    position: absolute;
+    pointer-events: none;
+    z-index: 20;
+    opacity: 0.9;
+}
+.mem-balloon1 {
+    top: -20px;
+    left: 15px;
+    transform: rotate(10deg);
+    animation: balloon1 2s infinite linear;
+}
+.mem-balloon2 {
+    top: -20px;
+    right: 15px;
+    transform: rotate(-10deg) scaleX(-1);
+    animation: balloon2 2s infinite linear;
+}
+
+/* On mobile — hide balloons so they dont overflow */
+@media (max-width: 600px) {
+    .mem-balloon { display: none; }
+    .mem-star5   { display: none; }
+}
+
+
+
+
+/* ── SCROLL HINT ARROW ──────────────────────────── */
+.scroll__hint {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    z-index: 100;
+    opacity: 0;
+    animation: fadeInHint 1s 4s forwards;
+}
+
+@keyframes fadeInHint {
+    to { opacity: 1; }
+}
+
+.scroll__hint span {
+    font-family: "Sriracha", cursive;
+    font-size: 0.85rem;
+    color: var(--color-text-pink);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.scroll__hint i {
+    font-size: 1.2rem;
+    color: var(--color-text-pink);
+    animation: bounceDown 1.2s ease-in-out infinite;
+}
+
+@keyframes bounceDown {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(7px); }
+}
+
+
+/* =====================================================
+   UPGRADE #9: DAYS SINCE BIRTHDAY COUNTER
+   ===================================================== */
+.counter__section {
+    width: 100%;
+    padding: 60px 5%;
+    text-align: center;
+    background: linear-gradient(-45deg, #feecea, #ffe4f0, #fff0f7, #ffd6e7, #ffe8d6, #feecea);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+    position: relative;
+}
+
+.counter__title {
+    font-family: "Pacifico", cursive;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    color: var(--color-text-pink);
+    text-shadow:
+        3px 3px var(--color-black),
+        0 0 20px rgba(255,120,130,0.5);
+    margin-bottom: 40px;
+    animation: birthdayGlow 2.5s ease-in-out infinite;
+}
+
+/* Big days number */
+.counter__main {
+    margin-bottom: 40px;
+}
+
+.counter__number {
+    font-family: "Pacifico", cursive;
+    font-size: clamp(5rem, 18vw, 10rem);
+    color: var(--color-text-pink);
+    line-height: 1;
+    text-shadow:
+        5px 5px var(--color-black),
+        0 0 30px rgba(255,120,130,0.6),
+        0 0 60px rgba(255,120,130,0.3);
+    animation: birthdayGlow 2s ease-in-out infinite;
+    display: inline-block;
+}
+
+.counter__label {
+    font-family: "Sriracha", cursive;
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 8px;
+    letter-spacing: 1px;
+}
+
+/* 3 stat cards row */
+.counter__stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.counter__stat {
+    background: white;
+    border: 3px solid rgba(255,120,130,0.4);
+    border-radius: 20px;
+    padding: 20px 30px;
+    min-width: 130px;
+    box-shadow: 0 8px 25px rgba(255,120,130,0.15);
+    transition: transform 0.2s ease;
+}
+
+.counter__stat:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(255,120,130,0.25);
+}
+
+.counter__stat-number {
+    font-family: "Pacifico", cursive;
+    font-size: 2rem;
+    color: var(--color-text-pink);
+    text-shadow: 2px 2px var(--color-black);
+}
+
+.counter__stat-label {
+    font-family: "Sriracha", cursive;
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 5px;
+}
+
+.counter__msg {
+    font-family: "Sriracha", cursive;
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.counter__msg strong {
+    color: var(--color-text-pink);
+    font-weight: bold;
+}
+
+@media (max-width: 500px) {
+    .counter__stat { min-width: 90px; padding: 14px 18px; }
+    .counter__stat-number { font-size: 1.4rem; }
+}
+
+/* =====================================================
+   UPGRADE #10: SHARE BUTTON
+   Mirrors the music button on the opposite corner
+   ===================================================== */
+.share__btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 9999;
+
+    background: linear-gradient(135deg, #a855f7, #7c3aed);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-family: "Sriracha", cursive;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.share__btn:hover {
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 8px 28px rgba(124, 58, 237, 0.6);
+}
+
+/* "Copied!" success state */
+.share__btn.copied {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    box-shadow: 0 4px 20px rgba(34, 197, 94, 0.4);
+}
+
+@media (max-width: 600px) {
+    .share__btn {
+        bottom: 15px;
+        left: 15px;
+        padding: 10px 14px;
+        font-size: 13px;
     }
 }
