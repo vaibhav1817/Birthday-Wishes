@@ -876,6 +876,9 @@ body {
 .content__letter .left .heart {
     position: absolute;
     opacity: 0;
+    font-size: 20px;
+    color: var(--color-heart);
+    filter: drop-shadow(0 0 3px var(--color-heart));
 }
 
 .content__letter .left .heart.animation {
