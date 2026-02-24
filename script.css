@@ -1,6 +1,6 @@
-/*
-    ðŸŽ“ LESSON: @import loads fonts from Google Fonts.
-    Pacifico = a fun, bubbly, festive font â€” perfect for birthdays!
+﻿/*
+    Ã°Å¸Å½â€œ LESSON: @import loads fonts from Google Fonts.
+    Pacifico = a fun, bubbly, festive font Ã¢â‚¬â€ perfect for birthdays!
 */
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Sriracha&display=swap');
 
@@ -22,11 +22,13 @@
 
 html {
     height: 100%;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
 }
 
 /*
-    ðŸŽ¨ UPGRADE #5: ANIMATED GRADIENT BACKGROUND
-    ðŸŽ“ LESSON: Instead of a static color, we use multiple gradient
+    Ã°Å¸Å½Â¨ UPGRADE #5: ANIMATED GRADIENT BACKGROUND
+    Ã°Å¸Å½â€œ LESSON: Instead of a static color, we use multiple gradient
     colors and animate the background-position shifting.
     'background-size: 400%' makes the gradient 4x bigger than the screen
     so there's always color to shift through!
@@ -37,6 +39,8 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
     /* Animated gradient with soft pinks, whites and peach tones */
     background: linear-gradient(-45deg, #feecea, #ffe4f0, #fff0f7, #ffd6e7, #ffe8d6, #feecea);
     background-size: 400% 400%;
@@ -56,13 +60,13 @@ body {
         background-position: 0% 50%;
     }
 
-    /* ðŸŽ“ This smoothly slides the gradient left â†’ right â†’ left forever */
+    /* Ã°Å¸Å½â€œ This smoothly slides the gradient left Ã¢â€ â€™ right Ã¢â€ â€™ left forever */
 }
 
 /*
-    ðŸŽµ UPGRADE #6: MUSIC BUTTON STYLES
-    ðŸŽ“ LESSON: position:fixed means the button stays in the same
-    spot on screen even when you scroll â€” it's "fixed" to viewport.
+    Ã°Å¸Å½Âµ UPGRADE #6: MUSIC BUTTON STYLES
+    Ã°Å¸Å½â€œ LESSON: position:fixed means the button stays in the same
+    spot on screen even when you scroll Ã¢â‚¬â€ it's "fixed" to viewport.
     top/left/right/bottom tell it WHERE on the screen to sit.
 */
 .music__btn {
@@ -100,8 +104,8 @@ body {
 }
 
 /*
-    ðŸŽ“ LESSON: When JS adds class "playing" to the button,
-    this extra animation kicks in â€” a gentle pulse/beat effect!
+    Ã°Å¸Å½â€œ LESSON: When JS adds class "playing" to the button,
+    this extra animation kicks in Ã¢â‚¬â€ a gentle pulse/beat effect!
     JS does: button.classList.add('playing')
 */
 .music__btn.playing {
@@ -125,14 +129,14 @@ body {
         transform: scale(1.05);
     }
 
-    /* Pulses in sync â€” like a heartbeat! */
+    /* Pulses in sync Ã¢â‚¬â€ like a heartbeat! */
 }
 
 
 #wrapper {
     position: relative;
     background-color: transparent;
-    /* Removed the grid pattern â€” the animated gradient on body is now the background */
+    /* Removed the grid pattern Ã¢â‚¬â€ the animated gradient on body is now the background */
     min-height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
@@ -192,7 +196,7 @@ body {
 
 .left .btn {
     transform: scale(0);
-    /* â±ï¸ Was 16s delay â€” now 7s. The button appears much sooner! */
+    /* Ã¢ÂÂ±Ã¯Â¸Â Was 16s delay Ã¢â‚¬â€ now 7s. The button appears much sooner! */
     animation: scaleCricle 2s 7s forwards ease-in-out;
 }
 
@@ -256,7 +260,7 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-    /* ðŸŽ¨ Changed to Pacifico â€” bubbly, festive, birthday-perfect! */
+    /* Ã°Å¸Å½Â¨ Changed to Pacifico Ã¢â‚¬â€ bubbly, festive, birthday-perfect! */
     font-family: 'Pacifico', cursive;
     font-size: clamp(2rem, 7vw, 4rem);
     flex-direction: column;
@@ -264,8 +268,8 @@ body {
 }
 
 /*
-    âœ¨ UPGRADE #3: GLOW EFFECTS
-    ðŸŽ“ LESSON: text-shadow works like this:
+    Ã¢Å“Â¨ UPGRADE #3: GLOW EFFECTS
+    Ã°Å¸Å½â€œ LESSON: text-shadow works like this:
         text-shadow: x-offset  y-offset  blur  color;
     When x=0 and y=0, the shadow spreads in ALL directions = GLOW!
     We stack multiple shadows with increasing blur for a rich glow.
@@ -281,7 +285,7 @@ body {
     justify-content: center;
 }
 
-/* "HAPPY" â€” white text with a white/pink outer glow */
+/* "HAPPY" Ã¢â‚¬â€ white text with a white/pink outer glow */
 .title .happy {
     color: var(--color-white);
     text-shadow:
@@ -289,7 +293,7 @@ body {
         -4px 4px var(--color-black),
         4px -4px var(--color-black),
         -4px -4px var(--color-black),
-        /* âœ¨ Glow layers â€” same color, 0 offset, different blur sizes */
+        /* Ã¢Å“Â¨ Glow layers Ã¢â‚¬â€ same color, 0 offset, different blur sizes */
         0 0 10px rgba(255, 255, 255, 0.8),
         0 0 25px rgba(255, 120, 130, 0.6),
         0 0 50px rgba(255, 120, 130, 0.4);
@@ -298,7 +302,7 @@ body {
     /* glow starts after letters appear */
 }
 
-/* "BIRTHDAY" â€” pink text with a pink/red outer glow */
+/* "BIRTHDAY" Ã¢â‚¬â€ pink text with a pink/red outer glow */
 .title .birthday {
     color: var(--color-text-pink);
     text-shadow:
@@ -306,7 +310,7 @@ body {
         -4px 4px var(--color-black),
         4px -4px var(--color-black),
         -4px -4px var(--color-black),
-        /* âœ¨ Glow layers â€” pink/red colors */
+        /* Ã¢Å“Â¨ Glow layers Ã¢â‚¬â€ pink/red colors */
         0 0 10px rgba(255, 120, 130, 0.9),
         0 0 30px rgba(246, 31, 31, 0.6),
         0 0 60px rgba(246, 31, 31, 0.3);
@@ -319,7 +323,7 @@ body {
     transform: translateY(50px);
     opacity: 0;
     visibility: hidden;
-    /* â±ï¸ Each letter uses --t set in HTML (0.5s, 0.7s...) */
+    /* Ã¢ÂÂ±Ã¯Â¸Â Each letter uses --t set in HTML (0.5s, 0.7s...) */
     animation: txtTranslateY .5s var(--t) forwards;
 }
 
@@ -332,7 +336,7 @@ body {
 }
 
 /*
-    ðŸŽ“ LESSON: @keyframes defines WHAT the animation does.
+    Ã°Å¸Å½â€œ LESSON: @keyframes defines WHAT the animation does.
     0% = start,  50% = middle,  100% = end.
     'infinite' in the animation property makes it loop forever.
     'ease-in-out' makes it accelerate and decelerate smoothly.
@@ -398,7 +402,7 @@ body {
     top: -350px;
     transform: rotate(-40deg);
     z-index: -1;
-    /* â±ï¸ Was 7s delay â€” now 3s. Hat drops down faster! */
+    /* Ã¢ÂÂ±Ã¯Â¸Â Was 7s delay Ã¢â‚¬â€ now 3s. Hat drops down faster! */
     animation: topHat 4s 3s forwards ease;
 }
 
@@ -431,7 +435,7 @@ body {
 }
 
 /*
-    ðŸŽ“ FIX: Date of Birth
+    Ã°Å¸Å½â€œ FIX: Date of Birth
     Old version had z-index:-1 hiding it behind other elements.
     New: simple fade + slide up animation. Clean and always visible!
 */
@@ -454,9 +458,9 @@ body {
 }
 
 /*
-    ðŸ”§ FIX: Rakshita's name was position:absolute + bottom:-20px
+    Ã°Å¸â€Â§ FIX: Rakshita's name was position:absolute + bottom:-20px
     which clipped it under the photo and  made it invisible.
-    Now itâ€™s position:relative so it sits naturally below the photo.
+    Now itÃ¢â‚¬â„¢s position:relative so it sits naturally below the photo.
 */
 .name {
     position: relative;
@@ -486,7 +490,7 @@ body {
 .right .box__account {
     position: relative;
     transform: translateY(700px);
-    /* â±ï¸ Was 5s delay â€” now 2s. The profile photo slides up almost immediately! */
+    /* Ã¢ÂÂ±Ã¯Â¸Â Was 5s delay Ã¢â‚¬â€ now 2s. The profile photo slides up almost immediately! */
     animation: topBoxImage 5s 2s forwards ease-in;
 }
 
@@ -497,8 +501,8 @@ body {
 }
 
 /*
-    ðŸŽ¨ UPGRADE #4: SPINNING RAINBOW BORDER ON PHOTO
-    ðŸŽ“ LESSON: conic-gradient() sweeps colors around a center point,
+    Ã°Å¸Å½Â¨ UPGRADE #4: SPINNING RAINBOW BORDER ON PHOTO
+    Ã°Å¸Å½â€œ LESSON: conic-gradient() sweeps colors around a center point,
     like a color wheel. We animate it spinning with @keyframes.
     The ::before pseudo-element draws the ring BEHIND the photo.
 */
@@ -558,7 +562,7 @@ body {
     justify-content: center;
     align-items: center;
     transform: scale(0);
-    /* â±ï¸ Was 12s delay â€” now 7s. The spinning circle pops in sooner! */
+    /* Ã¢ÂÂ±Ã¯Â¸Â Was 12s delay Ã¢â‚¬â€ now 7s. The spinning circle pops in sooner! */
     animation: scaleCricle 3s 7s forwards ease-in-out;
     z-index: 10;
 }
@@ -691,7 +695,7 @@ body {
     transform: scale(0);
     background-color: var(--color-black);
     clip-path: polygon(0 50%, 35% 35%, 50% 0, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%);
-    /* â±ï¸ Stars twinkling loop was 16s â€” now 8s */
+    /* Ã¢ÂÂ±Ã¯Â¸Â Stars twinkling loop was 16s Ã¢â‚¬â€ now 8s */
     animation: scaleCricle 3s var(--t) forwards,
         scaleStar 2s 8s infinite ease-in-out;
 }
@@ -776,7 +780,7 @@ body {
     bottom: 10%;
     left: 5%;
     transform: scale(0);
-    /* â±ï¸ Was 15s delay â€” now 7s. Smiley appears sooner! */
+    /* Ã¢ÂÂ±Ã¯Â¸Â Was 15s delay Ã¢â‚¬â€ now 7s. Smiley appears sooner! */
     animation: scaleCricle 3s 7s forwards ease-in-out;
 }
 
@@ -989,8 +993,8 @@ body {
 
 
 /* ============================================================
-   ðŸ“± UPGRADE #7: MOBILE RESPONSIVE DESIGN
-   ðŸŽ“ LESSON: @media queries apply styles ONLY when the screen
+   Ã°Å¸â€œÂ± UPGRADE #7: MOBILE RESPONSIVE DESIGN
+   Ã°Å¸Å½â€œ LESSON: @media queries apply styles ONLY when the screen
    matches a condition. The most common condition is max-width:
    
        @media (max-width: 768px) { ... }
@@ -1003,11 +1007,11 @@ body {
    - Sm Phone: max-width 400px
    ============================================================ */
 
-/* â”€â”€ TABLET (â‰¤ 900px) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* Ã¢â€â‚¬Ã¢â€â‚¬ TABLET (Ã¢â€°Â¤ 900px) Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 @media (max-width: 900px) {
 
     /*
-        ðŸŽ“ On tablet, the left+right sit side-by-side but closer together.
+        Ã°Å¸Å½â€œ On tablet, the left+right sit side-by-side but closer together.
         We reduce the photo size and text to fit the narrower screen.
     */
     .content {
@@ -1029,143 +1033,84 @@ body {
     }
 }
 
-/* â”€â”€ PHONE (â‰¤ 600px) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 @media (max-width: 600px) {
-
-    /*
-        ðŸŽ“ On phones, we STACK things vertically instead of side-by-side.
-        flex-direction: column  means items go TOP â†’ BOTTOM
-        flex-direction: row     means items go LEFT â†’ RIGHT (default)
-    */
+    /* Stack hero vertically */
     .content {
         flex-direction: column;
-        /* Stack left + right vertically */
         align-items: center;
-        padding: 80px 5% 2rem;
-        /* top padding clears the flag */
-        gap: 20px;
+        padding: 65px 4% 1.5rem;
+        gap: 14px;
     }
 
     .content .left,
     .content .right {
         width: 100%;
-        /* each section takes full width */
         align-items: center;
         text-align: center;
     }
 
-    /* Smaller birthday text on phone */
     .title {
-        font-size: clamp(2.2rem, 12vw, 3.5rem);
+        font-size: clamp(1.9rem, 10.5vw, 3rem);
         align-items: center;
     }
 
-    /* Smaller photo circle */
     .content .right .image {
-        width: 220px;
-        height: 220px;
+        width: 195px;
+        height: 195px;
     }
 
-    /* Spinning circle repositioned for mobile */
-    .cricle {
-        top: -15px;
-        right: -10px;
-    }
+    .cricle { top: -12px; right: -8px; }
 
-    /* Balloons â€” reposition so they don't fly off screen */
-    .right .balloon_one {
-        top: -40px;
-        left: -30px;
-    }
+    .right .balloon_one { top: -30px; left: -22px; }
+    .right .balloon_one img { width: 58px !important; }
+    .right .balloon_two { bottom: 8px; right: -28px; }
+    .right .balloon_two img { width: 58px !important; }
 
-    .right .balloon_one img {
-        width: 70px !important;
-    }
+    .title .hat { right: 4%; }
+    .title .hat img { width: 72px !important; }
 
-    .right .balloon_two {
-        bottom: 10px;
-        right: -40px;
-    }
+    .date__of__birth { min-width: 175px; padding: 6px 18px; margin-top: 14px; }
+    .date__of__birth span { font-size: 0.82rem; }
+    .name { margin-top: 14px; padding: 6px 18px; }
 
-    .right .balloon_two img {
-        width: 70px !important;
-    }
+    .flag__birthday { display: none; }
 
-    /* Hat â€” smaller and repositioned */
-    .title .hat {
-        right: 5%;
-    }
+    .music__btn { bottom: 14px; right: 14px; padding: 9px 13px; font-size: 12px; }
 
-    .title .hat img {
-        width: 80px !important;
-    }
+    .box__letter .letter__border { width: 95vw; height: auto; max-height: 88vh; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 
-    /* Date of birth â€” make text smaller */
-    .date__of__birth span {
-        font-size: 0.9rem;
-    }
-
-    /* Flag banners â€” hide on small screens (they overlap content) */
-    .flag__birthday {
-        display: none;
-    }
-
-    /* Music button â€” smaller on phone */
-    .music__btn {
-        bottom: 15px;
-        right: 15px;
-        padding: 10px 14px;
-        font-size: 13px;
-    }
-
-    /* Letter popup â€” full width on phone */
-    .box__letter .letter__border {
-        width: 95vw;
-        height: auto;
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-
-    /* Stack letter content vertically */
-    .letter__border .letter .content__letter {
-        flex-direction: column;
-    }
-
+    .letter__border .letter .content__letter { flex-direction: column; padding-bottom: 24px; }
     .letter__border .letter .content__letter .left,
-    .content__letter .right {
-        width: 100%;
-    }
+    .content__letter .right { width: 100%; border-right: none; }
 
-    .content__letter .right .love__img {
-        position: relative;
-        right: auto;
-        top: auto;
-        display: flex;
-        justify-content: center;
-        margin-bottom: 10px;
-    }
+    .content__letter .right .love__img { position: relative; right: auto; top: auto; display: flex; justify-content: center; margin-bottom: 10px; opacity: 1; }
+
+    /* Counter */
+    .counter__section { padding: 36px 4%; }
+    .counter__title { font-size: clamp(1.25rem, 5vw, 1.7rem); margin-bottom: 22px; }
+    .counter__main  { margin-bottom: 20px; }
+    .counter__stats { gap: 10px; }
+    .counter__stat  { min-width: 85px; padding: 12px 12px; border-radius: 14px; }
+    .counter__stat-number { font-size: 1.25rem; }
+    .counter__stat-label  { font-size: 0.72rem; }
+    .counter__msg { font-size: 0.9rem; }
+
+    /* Gallery */
+    .gallery__section  { padding: 32px 3%; }
+    .gallery__header   { margin-bottom: 18px; }
+    .gallery__header h2 { font-size: clamp(1.5rem, 7.5vw, 2.2rem); }
+    .gallery__header p  { font-size: 0.88rem; }
 }
 
-/* â”€â”€ SMALL PHONE (â‰¤ 400px) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* Small phone (<=400px) */
 @media (max-width: 400px) {
-
-    .title {
-        font-size: clamp(1.8rem, 11vw, 2.8rem);
-    }
-
-    .content .right .image {
-        width: 180px;
-        height: 180px;
-    }
-
-    .name span {
-        font-size: 1rem;
-    }
-
-    .date__of__birth {
-        min-width: 160px;
-        padding: 6px 15px;
-    }
+    .title { font-size: clamp(1.65rem, 10vw, 2.5rem); }
+    .content .right .image { width: 165px; height: 165px; }
+    .name span { font-size: 0.95rem; }
+    .date__of__birth { min-width: 145px; padding: 5px 12px; }
+    .right .balloon_one img, .right .balloon_two img { width: 46px !important; }
+    .counter__stat { min-width: 75px; padding: 9px 8px; }
+    .counter__stat-number { font-size: 1.05rem; }
 }
 
 /* =====================================================
@@ -1174,7 +1119,7 @@ body {
 .gallery__section {
     width: 100%;
     padding: 60px 5% 60px;
-    /* Same animated gradient as the body — seamless continuation */
+    /* Same animated gradient as the body â€” seamless continuation */
     background: linear-gradient(-45deg, #feecea, #ffe4f0, #fff0f7, #ffd6e7, #ffe8d6, #feecea);
     background-size: 400% 400%;
     animation: gradientShift 10s ease infinite;
@@ -1213,7 +1158,7 @@ body {
 }
 
 /*
-    🎓 HORIZONTAL SCROLL TRICK:
+    ðŸŽ“ HORIZONTAL SCROLL TRICK:
     display:flex puts all cards in a ROW.
     overflow-x: auto = allow scrolling left-right.
     scroll-snap-type: x mandatory = snap to each card perfectly.
@@ -1254,14 +1199,14 @@ body {
 }
 
 /*
-    🎓 flex-shrink: 0 is CRITICAL for horizontal scroll!
-    Without it, flex items shrink to fit — they'd all squish onto one screen.
+    ðŸŽ“ flex-shrink: 0 is CRITICAL for horizontal scroll!
+    Without it, flex items shrink to fit â€” they'd all squish onto one screen.
     With it, each card keeps its fixed width and you SCROLL to see them.
     scroll-snap-align: start = this card snaps to the left edge when scrolled.
 */
 .gallery__item {
     flex-shrink: 0;
-    /* don't squish — keep full size */
+    /* don't squish â€” keep full size */
     width: 280px;
     /* fixed card width */
     height: 280px;
@@ -1334,7 +1279,7 @@ body {
 /* Floating decorative hearts inside memories section */
 .gallery__section::before,
 .gallery__section::after {
-    content: '♥';
+    content: 'â™¥';
     position: absolute;
     font-size: 1.5rem;
     color: rgba(255, 120, 130, 0.2);
@@ -1441,7 +1386,7 @@ body {
     background: var(--color-text-pink);
 }
 
-/* Responsive — smaller cards on phones */
+/* Responsive â€” smaller cards on phones */
 @media (max-width: 600px) {
     .gallery__grid {
         gap: 12px;
@@ -1466,7 +1411,7 @@ body {
 }
 
 /* =====================================================
-   CAROUSEL — Card-by-card with slide transition
+   CAROUSEL â€” Card-by-card with slide transition
    ===================================================== */
 .carousel {
     position: relative;
@@ -1477,7 +1422,8 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    padding: 10px 0 20px;`r`n    z-index: 1;
+    padding: 10px 0 20px;
+    z-index: 1;
 }
 
 /* The frame that holds all stacked cards */
@@ -1485,8 +1431,8 @@ body {
     position: relative;
     width: 100%;
     height: 520px;
-    /* taller — fits portrait WhatsApp photos */
     perspective: 1200px;
+    touch-action: pan-y;
 }
 
 /* Every card: stacked absolutely on top of each other */
@@ -1508,13 +1454,13 @@ body {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* FULL photo visible — no cropping! */
+    /* FULL photo visible â€” no cropping! */
     display: block;
     background: #fee9ec;
     /* soft pink fill for empty letterbox areas */
 }
 
-/* The ACTIVE card — centred and fully visible */
+/* The ACTIVE card â€” centred and fully visible */
 .carousel__card.active {
     opacity: 1;
     pointer-events: auto;
@@ -1617,47 +1563,105 @@ body {
 
 @media (max-width: 600px) {
     .carousel {
-        max-width: 95vw;
+        max-width: 96vw;
+        gap: 12px;
+        padding: 6px 0 16px;
     }
 
     .carousel__track {
-        height: 320px;
+        height: 370px;
     }
 
     .carousel__btn {
-        width: 38px;
-        height: 38px;
-        font-size: 0.85rem;
+        width: 36px;
+        height: 36px;
+        font-size: 0.8rem;
+        border-width: 2px;
     }
 
     .carousel__btn--prev {
-        left: -10px;
+        left: 6px;
     }
 
     .carousel__btn--next {
-        right: -10px;
+        right: 6px;
+    }
+
+    .carousel__dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .carousel__counter {
+        font-size: 0.85rem;
+        margin-top: -4px;
+    }
+}
+
+@media (max-width: 400px) {
+    .carousel__track {
+        height: 300px;
+    }
+
+    .carousel__btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.72rem;
+    }
+
+    .carousel__btn--prev {
+        left: 2px;
+    }
+
+    .carousel__btn--next {
+        right: 2px;
     }
 }
 
 /* =====================================================
-   MEMORIES SECTION — Matching Decorations
+   MEMORIES SECTION â€” Matching Decorations
    Same animations as the hero, new positions for this section
    ===================================================== */
 
-/* Stars — scattered around the section (position:absolute inside position:relative section) */
+/* Stars â€” scattered around the section (position:absolute inside position:relative section) */
 .mem-decorate_star {
     position: absolute;
     animation: scaleStar 2s var(--t, 0s) infinite ease-in-out;
     pointer-events: none;
     z-index: 20;
 }
-.mem-star1 { top: 12%; left: 8%;  --t: 0.2s; }
-.mem-star2 { top: 10%; right: 8%; --t: 0.5s; }
-.mem-star3 { top: 40%; left: 3%;  --t: 0.8s; }
-.mem-star4 { top: 40%; right: 3%; --t: 0.3s; }
-.mem-star5 { bottom: 18%; left: 6%;  --t: 1s; }
 
-/* Smiley icon — bottom right corner, gently spinning */
+.mem-star1 {
+    top: 12%;
+    left: 8%;
+    --t: 0.2s;
+}
+
+.mem-star2 {
+    top: 10%;
+    right: 8%;
+    --t: 0.5s;
+}
+
+.mem-star3 {
+    top: 40%;
+    left: 3%;
+    --t: 0.8s;
+}
+
+.mem-star4 {
+    top: 40%;
+    right: 3%;
+    --t: 0.3s;
+}
+
+.mem-star5 {
+    bottom: 18%;
+    left: 6%;
+    --t: 1s;
+}
+
+/* Smiley icon â€” bottom right corner, gently spinning */
 .mem-smiley {
     position: absolute;
     bottom: 20px;
@@ -1667,23 +1671,28 @@ body {
     opacity: 0.85;
     animation: rotateSmiley 6s linear infinite;
 }
+
 @keyframes rotateSmiley {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-/* Balloons — top corners, swaying like in hero */
+/* Balloons â€” top corners, swaying like in hero */
 .mem-balloon {
     position: absolute;
     pointer-events: none;
     z-index: 20;
     opacity: 0.9;
 }
+
 .mem-balloon1 {
     top: -20px;
     left: 15px;
     transform: rotate(10deg);
     animation: balloon1 2s infinite linear;
 }
+
 .mem-balloon2 {
     top: -20px;
     right: 15px;
@@ -1691,16 +1700,21 @@ body {
     animation: balloon2 2s infinite linear;
 }
 
-/* On mobile — hide balloons so they dont overflow */
+/* On mobile â€” hide balloons so they dont overflow */
 @media (max-width: 600px) {
-    .mem-balloon { display: none; }
-    .mem-star5   { display: none; }
+    .mem-balloon {
+        display: none;
+    }
+
+    .mem-star5 {
+        display: none;
+    }
 }
 
 
 
 
-/* ── SCROLL HINT ARROW ──────────────────────────── */
+/* â”€â”€ SCROLL HINT ARROW â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .scroll__hint {
     position: absolute;
     bottom: 20px;
@@ -1717,7 +1731,9 @@ body {
 }
 
 @keyframes fadeInHint {
-    to { opacity: 1; }
+    to {
+        opacity: 1;
+    }
 }
 
 .scroll__hint span {
@@ -1735,8 +1751,15 @@ body {
 }
 
 @keyframes bounceDown {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(7px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(7px);
+    }
 }
 
 
@@ -1759,7 +1782,7 @@ body {
     color: var(--color-text-pink);
     text-shadow:
         3px 3px var(--color-black),
-        0 0 20px rgba(255,120,130,0.5);
+        0 0 20px rgba(255, 120, 130, 0.5);
     margin-bottom: 40px;
     animation: birthdayGlow 2.5s ease-in-out infinite;
 }
@@ -1776,8 +1799,8 @@ body {
     line-height: 1;
     text-shadow:
         5px 5px var(--color-black),
-        0 0 30px rgba(255,120,130,0.6),
-        0 0 60px rgba(255,120,130,0.3);
+        0 0 30px rgba(255, 120, 130, 0.6),
+        0 0 60px rgba(255, 120, 130, 0.3);
     animation: birthdayGlow 2s ease-in-out infinite;
     display: inline-block;
 }
@@ -1801,17 +1824,17 @@ body {
 
 .counter__stat {
     background: white;
-    border: 3px solid rgba(255,120,130,0.4);
+    border: 3px solid rgba(255, 120, 130, 0.4);
     border-radius: 20px;
     padding: 20px 30px;
     min-width: 130px;
-    box-shadow: 0 8px 25px rgba(255,120,130,0.15);
+    box-shadow: 0 8px 25px rgba(255, 120, 130, 0.15);
     transition: transform 0.2s ease;
 }
 
 .counter__stat:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(255,120,130,0.25);
+    box-shadow: 0 15px 35px rgba(255, 120, 130, 0.25);
 }
 
 .counter__stat-number {
@@ -1843,8 +1866,14 @@ body {
 }
 
 @media (max-width: 500px) {
-    .counter__stat { min-width: 90px; padding: 14px 18px; }
-    .counter__stat-number { font-size: 1.4rem; }
+    .counter__stat {
+        min-width: 90px;
+        padding: 14px 18px;
+    }
+
+    .counter__stat-number {
+        font-size: 1.4rem;
+    }
 }
 
 /* =====================================================
